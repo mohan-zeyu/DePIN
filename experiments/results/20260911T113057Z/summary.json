@@ -1,0 +1,1409 @@
+{
+  "a": {
+    "experiment": "a_environment_survey",
+    "status": "受阻",
+    "reason": "计数权限未获实测通过（verdict=error）",
+    "started_at": "2026-09-11T11:30:57.614917+00:00",
+    "finished_at": "2026-09-11T11:31:04.671792+00:00",
+    "duration_seconds": 7.057,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/a_environment.json"
+    },
+    "data": {
+      "system": {
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+        "machine": "x86_64",
+        "kernel": "6.18.33.2-microsoft-standard-WSL2",
+        "python": "3.12.14",
+        "python_executable": "/home/mohan/depin/.venv/bin/python3",
+        "os_release": "Ubuntu 26.04 LTS"
+      },
+      "wsl": {
+        "is_wsl": true,
+        "evidence": [
+          "/proc/version 含 'microsoft'：Linux version 6.18.33.2-microsoft-standard-WSL2 (root@f1bbfb02316b) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UT",
+          "目录 /mnt/c/Windows 存在",
+          "目录 /usr/lib/wsl/lib 存在（WSL GPU 驱动库挂载点）"
+        ]
+      },
+      "gpu": {
+        "gpu_present": true,
+        "is_wsl": true,
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "uuid": "GPU-81dc8519-806a-0d83-324d-3b0e235ceac9",
+        "driver_version": "616.56",
+        "memory_total_bytes": 8585740288,
+        "compute_capability": "8.9",
+        "nvidia_smi_found": true,
+        "nvml_unavailable_fields_example": []
+      },
+      "torch": {
+        "available": true,
+        "torch_version": "2.14.0+cu130",
+        "cuda_runtime": "13.0",
+        "cudnn": 92400,
+        "cuda_available": true,
+        "device_count": 1,
+        "device_0": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "bf16_supported": true,
+        "compute_capability": "8.9"
+      },
+      "ncu": {
+        "found": true,
+        "path": "/home/mohan/opt/nsight-compute/ncu",
+        "discovery_evidence": [
+          "PATH 命中：/home/mohan/opt/nsight-compute/ncu"
+        ],
+        "version": {
+          "returncode": 0,
+          "stdout": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2025 NVIDIA Corporation\nVersion 2025.1.1.0 (build 35528883) (public-release)\n",
+          "stderr": ""
+        }
+      },
+      "counter_permission": {
+        "verdict": "error",
+        "returncode": 1,
+        "timed_out": false,
+        "profiled_rows": 0,
+        "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+        "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+      }
+    }
+  },
+  "b": {
+    "experiment": "b_workload_train_infer",
+    "status": "实测通过",
+    "reason": "训练+推理完成（精度 ['bf16', 'fp16', 'fp32']）",
+    "started_at": "2026-09-11T11:31:04.672222+00:00",
+    "finished_at": "2026-09-11T11:31:12.566908+00:00",
+    "duration_seconds": 7.895,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/a_environment.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json"
+    },
+    "data": {
+      "torch": {
+        "torch_version": "2.14.0+cu130",
+        "cuda_runtime": "13.0",
+        "cudnn": 92400,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+      },
+      "train": {
+        "fp32": {
+          "status": "ok",
+          "precision": "fp32",
+          "steps": 200,
+          "batch_size": 64,
+          "seed": 20260911,
+          "first_loss": 2.320725679397583,
+          "final_loss": 1.8693277835845947,
+          "mean_loss_last10": 2.103606843948364,
+          "loss_decreased": true,
+          "seconds": 1.5954723930008186,
+          "steps_per_second": 125.35472307598705,
+          "loss_every_log": [
+            2.320725679397583,
+            2.2265567779541016,
+            1.9273499250411987,
+            2.270277261734009
+          ]
+        },
+        "fp16": {
+          "status": "ok",
+          "precision": "fp16",
+          "steps": 200,
+          "batch_size": 64,
+          "seed": 20260911,
+          "first_loss": 2.320709228515625,
+          "final_loss": 2.2531051635742188,
+          "mean_loss_last10": 2.1837677001953124,
+          "loss_decreased": true,
+          "seconds": 1.766789178000181,
+          "steps_per_second": 113.19969721932466,
+          "loss_every_log": [
+            2.320709228515625,
+            2.259613037109375,
+            2.146484375,
+            2.296661376953125
+          ]
+        },
+        "bf16": {
+          "status": "ok",
+          "precision": "bf16",
+          "steps": 200,
+          "batch_size": 64,
+          "seed": 20260911,
+          "first_loss": 2.31982421875,
+          "final_loss": 1.82232666015625,
+          "mean_loss_last10": 2.04161376953125,
+          "loss_decreased": true,
+          "seconds": 1.744485546998476,
+          "steps_per_second": 114.64698021953559,
+          "loss_every_log": [
+            2.31982421875,
+            2.2337646484375,
+            1.436920166015625,
+            2.2064208984375
+          ]
+        }
+      },
+      "inference": {
+        "fp32": {
+          "status": "ok",
+          "precision": "fp32",
+          "batches": 50,
+          "batch_size": 64,
+          "seed": 20260911,
+          "warmup_batches": 3,
+          "seconds": 0.03882678797526751,
+          "images": 3200,
+          "batch_latency_stats": {
+            "n": 50,
+            "min": 0.0005565249994106125,
+            "median": 0.0007706164997216547,
+            "max": 0.0010256850000587292
+          },
+          "output_checksum": 95.66881227493286,
+          "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+        },
+        "fp16": {
+          "status": "ok",
+          "precision": "fp16",
+          "batches": 50,
+          "batch_size": 64,
+          "seed": 20260911,
+          "warmup_batches": 3,
+          "seconds": 0.04156257498107152,
+          "images": 3200,
+          "batch_latency_stats": {
+            "n": 50,
+            "min": 0.0007327099992835429,
+            "median": 0.0008140289974107873,
+            "max": 0.0010343219983042218
+          },
+          "output_checksum": 94.5712890625,
+          "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+        },
+        "bf16": {
+          "status": "ok",
+          "precision": "bf16",
+          "batches": 50,
+          "batch_size": 64,
+          "seed": 20260911,
+          "warmup_batches": 3,
+          "seconds": 0.05222934799530776,
+          "images": 3200,
+          "batch_latency_stats": {
+            "n": 50,
+            "min": 0.0008846970013109967,
+            "median": 0.0010329030010325368,
+            "max": 0.0012850359998992644
+          },
+          "output_checksum": 95.09375,
+          "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+        }
+      },
+      "realism_statement": "训练为真实 SGD 反向传播 + 交叉熵；推理为真实 batch forward。无 sleep/空循环/固定返回值（spec §6.1）。"
+    }
+  },
+  "c": {
+    "experiment": "c_counter_collection",
+    "status": "受阻",
+    "reason": "计数权限受阻（verdict=error，证据见 counter_permission.evidence）",
+    "started_at": "2026-09-11T11:31:12.567498+00:00",
+    "finished_at": "2026-09-11T11:31:18.825812+00:00",
+    "duration_seconds": 6.258,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/c_counter_collection.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+      "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+      "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json"
+    },
+    "data": {
+      "precision_support": {
+        "fp32": true,
+        "fp16": true,
+        "bf16": true,
+        "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "compute_capability": "8.9"
+      },
+      "ncu": {
+        "found": true,
+        "path": "/home/mohan/opt/nsight-compute/ncu",
+        "discovery_evidence": [
+          "PATH 命中：/home/mohan/opt/nsight-compute/ncu"
+        ],
+        "wanted_metrics": [
+          "sm__inst_executed_pipe_fp64",
+          "sm__inst_executed_pipe_fp32",
+          "sm__inst_executed_pipe_fp16",
+          "sm__inst_executed_pipe_alu",
+          "sm__pipe_tensor_op_hmma_cycles_active",
+          "sm__inst_executed_pipe_tensor_op_hmma",
+          "sm__inst_executed_pipe_tensor_op_imma",
+          "sm__pipe_tensor_cycles_active",
+          "sm__cycles_elapsed",
+          "sm__cycles_active",
+          "gpu__time_duration"
+        ],
+        "counter_permission": {
+          "verdict": "error",
+          "returncode": 1,
+          "timed_out": false,
+          "profiled_rows": 0,
+          "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+          "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+        },
+        "blocked_reason": "计数权限受阻（verdict=error，证据见 counter_permission.evidence）"
+      },
+      "torch_profiler_estimates": {
+        "warning": "torch.profiler with_flops=True 的 FLOPs 是 shape 推导估算，不是硬件实测（spec §7.1）；仅作交叉参考，不得用于计费口径",
+        "per_precision": {
+          "fp32": {
+            "total_flops_estimate": 1681915904
+          },
+          "fp16": {
+            "total_flops_estimate": 3342860288
+          }
+        }
+      }
+    }
+  },
+  "d": {
+    "experiment": "d_attribution_test",
+    "status": "实测通过",
+    "reason": "进程级归因可行（smi）；ncu 部分未验证/受阻",
+    "started_at": "2026-09-11T11:31:18.826895+00:00",
+    "finished_at": "2026-09-11T11:31:34.031463+00:00",
+    "duration_seconds": 15.205,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/d_attribution.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+      "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+      "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+      "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+      "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt"
+    },
+    "data": {
+      "nvidia_smi": {
+        "found": true,
+        "path": "/usr/lib/wsl/lib/nvidia-smi"
+      },
+      "nvml_per_process": {
+        "available": true,
+        "error": null
+      },
+      "baseline": {
+        "smi": {
+          "pids": [
+            6141
+          ]
+        },
+        "nvml": {
+          "available": true,
+          "processes": [
+            {
+              "pid": 6141,
+              "used_memory_bytes": 0
+            }
+          ]
+        }
+      },
+      "pids": {
+        "workload": 6337,
+        "noise": 6304
+      },
+      "samples": [
+        {
+          "t": 1789126280.933,
+          "smi_pids": [
+            6141
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126281.204,
+          "smi_pids": [
+            6141
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126281.483,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126281.769,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126282.101,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126282.37,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126282.665,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126282.94,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126283.202,
+          "smi_pids": [
+            6141,
+            6304
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126283.47,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126283.748,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126284.021,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126284.299,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126284.575,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126284.844,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126285.11,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126285.383,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126285.645,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126285.919,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126286.196,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126286.474,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126286.775,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126287.061,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126287.335,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        },
+        {
+          "t": 1789126287.601,
+          "smi_pids": [
+            6141,
+            6304,
+            6337
+          ],
+          "smi_rows_raw": [
+            "6141, [Not Found], [N/A]",
+            "6304, [Not Found], [N/A]",
+            "6337, [Not Found], [N/A]"
+          ],
+          "nvml": {
+            "available": true,
+            "processes": [
+              {
+                "pid": 6141,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6304,
+                "used_memory_bytes": 0
+              },
+              {
+                "pid": 6337,
+                "used_memory_bytes": 0
+              }
+            ]
+          }
+        }
+      ],
+      "concurrent_attribution": {
+        "nvidia_smi_query_compute_apps_separated": true,
+        "nvml_per_process_separated": true,
+        "nvml_per_process_available": true,
+        "sample_count": 25
+      },
+      "ncu_target_only": {
+        "tested": false,
+        "blocked_reason": "计数权限受阻（error）"
+      },
+      "conclusions": {
+        "per_task_attribution": "进程级归因可行：nvidia-smi 与NVML 每进程 API 可区分负载与干扰进程",
+        "kernel_level": "ncu 部分未验证/受阻",
+        "caveats": [
+          "pid/进程名/显存占用均由驱动自报，核验方需独立读取才能防伪造报告（spec §7.3-5/6）",
+          "WSL 上 NVML 每进程 API 与 nvidia-smi --query-compute-apps 可能受限，本实验如实记录实测结果"
+        ]
+      }
+    }
+  },
+  "e": {
+    "experiment": "e_replay_overhead",
+    "status": "受阻",
+    "reason": "计数权限受阻（error），重放实验无法执行",
+    "started_at": "2026-09-11T11:31:34.032870+00:00",
+    "finished_at": "2026-09-11T11:31:52.346020+00:00",
+    "duration_seconds": 18.313,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/e_replay_overhead.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+      "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+      "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+      "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+      "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt"
+    },
+    "data": {
+      "replay_batches": 10,
+      "baseline": {
+        "runs": [
+          {
+            "rep": 0,
+            "returncode": 0,
+            "seconds": 4.097408241999801
+          },
+          {
+            "rep": 1,
+            "returncode": 0,
+            "seconds": 4.088269840001885
+          },
+          {
+            "rep": 2,
+            "returncode": 0,
+            "seconds": 4.051403967001534
+          }
+        ],
+        "median_seconds": 4.088269840001885
+      },
+      "ncu": {
+        "found": true,
+        "path": "/home/mohan/opt/nsight-compute/ncu",
+        "counter_permission": {
+          "verdict": "error",
+          "returncode": 1,
+          "timed_out": false,
+          "profiled_rows": 0,
+          "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+          "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+        }
+      }
+    }
+  },
+  "f": {
+    "experiment": "f_stop_latency",
+    "status": "实测通过",
+    "reason": "每档间隔均完成；仅进程退出信号可用（每进程/利用率字段不可用）",
+    "started_at": "2026-09-11T11:31:52.348956+00:00",
+    "finished_at": "2026-09-11T11:35:48.380545+00:00",
+    "duration_seconds": 236.032,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/f_stop_latency.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+      "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+      "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+      "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+      "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt",
+      "noise_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep0.txt",
+      "samples_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep0.jsonl",
+      "noise_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep1.txt",
+      "samples_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep1.jsonl",
+      "noise_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep2.txt",
+      "samples_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep2.jsonl",
+      "noise_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep3.txt",
+      "samples_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep3.jsonl",
+      "noise_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep4.txt",
+      "samples_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep4.jsonl",
+      "noise_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep0.txt",
+      "samples_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep0.jsonl",
+      "noise_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep1.txt",
+      "samples_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep1.jsonl",
+      "noise_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep2.txt",
+      "samples_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep2.jsonl",
+      "noise_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep3.txt",
+      "samples_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep3.jsonl",
+      "noise_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep4.txt",
+      "samples_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep4.jsonl"
+    },
+    "data": {
+      "intervals": {
+        "0.1s": {
+          "interval_seconds": 0.1,
+          "reps": [
+            {
+              "rep": 0,
+              "interval_seconds": 0.1,
+              "t_stop_epoch": 1789126314.3734028,
+              "process_exit_latency_seconds": 0.3761887550354004,
+              "idle_observation": null,
+              "sampler_samples": 226,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 1,
+              "interval_seconds": 0.1,
+              "t_stop_epoch": 1789126336.9304912,
+              "process_exit_latency_seconds": 0.3712756633758545,
+              "idle_observation": null,
+              "sampler_samples": 226,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 2,
+              "interval_seconds": 0.1,
+              "t_stop_epoch": 1789126359.4765973,
+              "process_exit_latency_seconds": 0.3608086109161377,
+              "idle_observation": null,
+              "sampler_samples": 226,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 3,
+              "interval_seconds": 0.1,
+              "t_stop_epoch": 1789126382.028549,
+              "process_exit_latency_seconds": 0.36589860916137695,
+              "idle_observation": null,
+              "sampler_samples": 226,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 4,
+              "interval_seconds": 0.1,
+              "t_stop_epoch": 1789126404.5670667,
+              "process_exit_latency_seconds": 0.36057567596435547,
+              "idle_observation": null,
+              "sampler_samples": 226,
+              "sampler_field_errors": {}
+            }
+          ],
+          "process_exit_latency": {
+            "n": 5,
+            "min": 0.36057567596435547,
+            "median": 0.36589860916137695,
+            "max": 0.3761887550354004
+          },
+          "idle_observation_latency": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "observation_methods": [],
+          "note": "观测延迟受采样间隔量化（≤ interval + 处理时延）；NVML 利用率窗口本身有约 1s 惯性，实测值可能大于一个采样周期"
+        },
+        "1s": {
+          "interval_seconds": 1.0,
+          "reps": [
+            {
+              "rep": 0,
+              "interval_seconds": 1.0,
+              "t_stop_epoch": 1789126428.1077685,
+              "process_exit_latency_seconds": 0.5353574752807617,
+              "idle_observation": null,
+              "sampler_samples": 25,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 1,
+              "interval_seconds": 1.0,
+              "t_stop_epoch": 1789126452.7293873,
+              "process_exit_latency_seconds": 0.6533823013305664,
+              "idle_observation": null,
+              "sampler_samples": 25,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 2,
+              "interval_seconds": 1.0,
+              "t_stop_epoch": 1789126477.4721375,
+              "process_exit_latency_seconds": 0.5828161239624023,
+              "idle_observation": null,
+              "sampler_samples": 25,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 3,
+              "interval_seconds": 1.0,
+              "t_stop_epoch": 1789126502.1444826,
+              "process_exit_latency_seconds": 0.5405092239379883,
+              "idle_observation": null,
+              "sampler_samples": 25,
+              "sampler_field_errors": {}
+            },
+            {
+              "rep": 4,
+              "interval_seconds": 1.0,
+              "t_stop_epoch": 1789126526.767822,
+              "process_exit_latency_seconds": 0.5418360233306885,
+              "idle_observation": null,
+              "sampler_samples": 25,
+              "sampler_field_errors": {}
+            }
+          ],
+          "process_exit_latency": {
+            "n": 5,
+            "min": 0.5353574752807617,
+            "median": 0.5418360233306885,
+            "max": 0.6533823013305664
+          },
+          "idle_observation_latency": {
+            "n": 0,
+            "min": null,
+            "median": null,
+            "max": null
+          },
+          "observation_methods": [],
+          "note": "观测延迟受采样间隔量化（≤ interval + 处理时延）；NVML 利用率窗口本身有约 1s 惯性，实测值可能大于一个采样周期"
+        }
+      },
+      "fatal_error": null
+    }
+  },
+  "g": {
+    "experiment": "g_evidence_report",
+    "status": "实测通过",
+    "reason": "已汇总 6 个实验并生成 REPORT.md（各能力结论以表内三态为准）",
+    "started_at": "2026-09-11T11:35:48.381385+00:00",
+    "finished_at": "2026-09-11T11:35:48.383865+00:00",
+    "duration_seconds": 0.002,
+    "artifacts": {
+      "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+      "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/g_evidence_report.json",
+      "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+      "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+      "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+      "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+      "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+      "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt",
+      "noise_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep0.txt",
+      "samples_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep0.jsonl",
+      "noise_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep1.txt",
+      "samples_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep1.jsonl",
+      "noise_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep2.txt",
+      "samples_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep2.jsonl",
+      "noise_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep3.txt",
+      "samples_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep3.jsonl",
+      "noise_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep4.txt",
+      "samples_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep4.jsonl",
+      "noise_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep0.txt",
+      "samples_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep0.jsonl",
+      "noise_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep1.txt",
+      "samples_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep1.jsonl",
+      "noise_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep2.txt",
+      "samples_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep2.jsonl",
+      "noise_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep3.txt",
+      "samples_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep3.jsonl",
+      "noise_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep4.txt",
+      "samples_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep4.jsonl",
+      "report": "/home/mohan/depin/experiments/results/20260911T113057Z/REPORT.md"
+    },
+    "data": {
+      "meta": {
+        "generated_at": "2026-09-11T11:35:48.382834+00:00",
+        "results_dir": "/home/mohan/depin/experiments/results/20260911T113057Z",
+        "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+        "gpu_summary": {
+          "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "driver_version": "616.56",
+          "compute_capability": "8.9",
+          "is_wsl": true
+        }
+      },
+      "assessment": [
+        {
+          "number": 1,
+          "title": "GPU 型号、驱动、系统、执行环境及可用计量权限",
+          "status": "受阻",
+          "source_statuses": {
+            "a": "受阻"
+          },
+          "notes": [
+            "a environment_survey: 受阻（计数权限未获实测通过（verdict=error））"
+          ]
+        },
+        {
+          "number": 2,
+          "title": "使用的硬件计数工具、原始指标、单位、覆盖范围和转换规则",
+          "status": "受阻",
+          "source_statuses": {
+            "c": "受阻"
+          },
+          "notes": [
+            "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））"
+          ]
+        },
+        {
+          "number": 3,
+          "title": "是否能区分所需精度与算子类别，如何归因到任务和参与 GPU",
+          "status": "受阻",
+          "source_statuses": {
+            "c": "受阻",
+            "d": "实测通过"
+          },
+          "notes": [
+            "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））",
+            "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）"
+          ]
+        },
+        {
+          "number": 4,
+          "title": "测量开销，是否需要重放，以及如何区分业务执行与测量引起的额外执行",
+          "status": "受阻",
+          "source_statuses": {
+            "e": "受阻"
+          },
+          "notes": [
+            "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）"
+          ]
+        },
+        {
+          "number": 5,
+          "title": "同机其他任务、空操作、重复执行或伪造报告是否会污染计量",
+          "status": "受阻",
+          "source_statuses": {
+            "d": "实测通过",
+            "e": "受阻"
+          },
+          "notes": [
+            "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）",
+            "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）"
+          ]
+        },
+        {
+          "number": 6,
+          "title": "核验组织实际取得什么证据、如何检查、哪些部分仍需信任设备所有者",
+          "status": "受阻",
+          "source_statuses": {
+            "a": "受阻",
+            "c": "受阻",
+            "d": "实测通过",
+            "e": "受阻",
+            "f": "实测通过"
+          },
+          "notes": [
+            "a environment_survey: 受阻（计数权限未获实测通过（verdict=error））",
+            "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））",
+            "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）",
+            "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）",
+            "f stop_latency: 实测通过（每档间隔均完成；仅进程退出信号可用（每进程/利用率字段不可用））"
+          ]
+        },
+        {
+          "number": 7,
+          "title": "对每项能力给出“实测通过／未覆盖／受阻”",
+          "status": "实测通过",
+          "source_statuses": {
+            "g": "实测通过"
+          },
+          "notes": [
+            "g evidence_report: 实测通过（未运行）"
+          ]
+        }
+      ],
+      "trust_assumptions": [
+        "ncu 存在但 perf counter 权限被拒（ERR_NVGPUCTRPERM 类）：WSL 内核驱动参数由 Windows 侧管理，常规手段无法放开。除非换原生 Linux/放开权限，否则“硬件实测计数”受阻，只能退回估算口径并显式改变计费信任假设。",
+        "所有计量材料（JSONL/CSV/报告）由 Worker 侧生成：核验组织可以校验签名、哈希与重放一致性，但无法从这些文件本身证明“原始执行确实发生过、且只发生这一次”。GPU 用量可信性与 GPU 身份可信性是两个独立问题（spec §7.3 末段）。",
+        "本报告只覆盖单机单卡场景；多 GPU/多提供者的按卡归因与跨集群执行未在本阶段验证，对应能力按“未覆盖”处理，不得默认可用。"
+      ],
+      "experiments_present": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ]
+    }
+  }
+}

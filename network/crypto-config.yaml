@@ -1,0 +1,89 @@
+# crypto-config.yaml — cryptogen 配置（depin.dev 开发网络）
+#
+# 拓扑（stage-1 集中部署简化，见 README.md 的局限性声明）：
+#   - OrdererOrg：1 个 etcdRaft orderer（orderer.depin.dev:7050）
+#   - UserOrg：唯一运行 peer 的组织（peer0.user.depin.dev:7051）。
+#     普通用户与 Worker 身份都签发在 UserOrg。
+#   - Verify1/2/3Org：核验组织，只签发身份（MSP/钱包），stage-1 不运行 peer。
+#   - Arbiter1/2/3Org：仲裁组织，同上。
+#
+# cryptogen 生成的 UserOrg 用户目录为 User1/User2/User3@user.depin.dev，
+# scripts/up.sh 会把 User3 目录复制为 worker1@user.depin.dev（Worker 运行身份）。
+# 更详细的身份清单见 README.md。
+
+OrdererOrgs:
+  - Name: OrdererOrg
+    Domain: depin.dev
+    EnableNodeOUs: true
+    Specs:
+      - Hostname: orderer
+        SANS:
+          - localhost
+          - 127.0.0.1
+
+PeerOrgs:
+  # 普通用户 + Worker 身份所在组织；也是 stage-1 唯一运行 peer 的组织。
+  - Name: UserOrg
+    Domain: user.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 1
+      SANS:
+        - localhost
+        - 127.0.0.1
+    Users:
+      # 生成 User1/User2/User3（Admin 额外生成）。
+      # User1 → user1（普通用户/任务发布者）
+      # User2 → user2（普通用户/算力提供者）
+      # User3 → worker1（Worker 运行身份，up.sh 复制目录重命名）
+      Count: 3
+
+  # 核验组织：身份齐备、不运行 peer（stage-1 简化）。
+  - Name: Verify1Org
+    Domain: verify1.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1
+
+  - Name: Verify2Org
+    Domain: verify2.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1
+
+  - Name: Verify3Org
+    Domain: verify3.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1
+
+  # 仲裁组织：身份齐备、不运行 peer（stage-1 简化）。
+  - Name: Arbiter1Org
+    Domain: arbiter1.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1
+
+  - Name: Arbiter2Org
+    Domain: arbiter2.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1
+
+  - Name: Arbiter3Org
+    Domain: arbiter3.depin.dev
+    EnableNodeOUs: true
+    Template:
+      Count: 0
+    Users:
+      Count: 1

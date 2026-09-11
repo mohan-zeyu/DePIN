@@ -1,0 +1,156 @@
+{
+  "experiment": "g_evidence_report",
+  "status": "实测通过",
+  "reason": "已汇总 6 个实验并生成 REPORT.md（各能力结论以表内三态为准）",
+  "started_at": "2026-09-11T11:35:48.381385+00:00",
+  "finished_at": "2026-09-11T11:35:48.383865+00:00",
+  "duration_seconds": 0.002,
+  "artifacts": {
+    "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+    "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/g_evidence_report.json",
+    "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+    "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+    "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+    "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+    "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+    "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt",
+    "noise_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep0.txt",
+    "samples_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep0.jsonl",
+    "noise_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep1.txt",
+    "samples_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep1.jsonl",
+    "noise_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep2.txt",
+    "samples_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep2.jsonl",
+    "noise_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep3.txt",
+    "samples_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep3.jsonl",
+    "noise_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep4.txt",
+    "samples_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep4.jsonl",
+    "noise_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep0.txt",
+    "samples_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep0.jsonl",
+    "noise_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep1.txt",
+    "samples_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep1.jsonl",
+    "noise_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep2.txt",
+    "samples_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep2.jsonl",
+    "noise_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep3.txt",
+    "samples_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep3.jsonl",
+    "noise_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep4.txt",
+    "samples_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep4.jsonl",
+    "report": "/home/mohan/depin/experiments/results/20260911T113057Z/REPORT.md"
+  },
+  "data": {
+    "meta": {
+      "generated_at": "2026-09-11T11:35:48.382834+00:00",
+      "results_dir": "/home/mohan/depin/experiments/results/20260911T113057Z",
+      "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+      "gpu_summary": {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "driver_version": "616.56",
+        "compute_capability": "8.9",
+        "is_wsl": true
+      }
+    },
+    "assessment": [
+      {
+        "number": 1,
+        "title": "GPU 型号、驱动、系统、执行环境及可用计量权限",
+        "status": "受阻",
+        "source_statuses": {
+          "a": "受阻"
+        },
+        "notes": [
+          "a environment_survey: 受阻（计数权限未获实测通过（verdict=error））"
+        ]
+      },
+      {
+        "number": 2,
+        "title": "使用的硬件计数工具、原始指标、单位、覆盖范围和转换规则",
+        "status": "受阻",
+        "source_statuses": {
+          "c": "受阻"
+        },
+        "notes": [
+          "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））"
+        ]
+      },
+      {
+        "number": 3,
+        "title": "是否能区分所需精度与算子类别，如何归因到任务和参与 GPU",
+        "status": "受阻",
+        "source_statuses": {
+          "c": "受阻",
+          "d": "实测通过"
+        },
+        "notes": [
+          "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））",
+          "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）"
+        ]
+      },
+      {
+        "number": 4,
+        "title": "测量开销，是否需要重放，以及如何区分业务执行与测量引起的额外执行",
+        "status": "受阻",
+        "source_statuses": {
+          "e": "受阻"
+        },
+        "notes": [
+          "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）"
+        ]
+      },
+      {
+        "number": 5,
+        "title": "同机其他任务、空操作、重复执行或伪造报告是否会污染计量",
+        "status": "受阻",
+        "source_statuses": {
+          "d": "实测通过",
+          "e": "受阻"
+        },
+        "notes": [
+          "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）",
+          "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）"
+        ]
+      },
+      {
+        "number": 6,
+        "title": "核验组织实际取得什么证据、如何检查、哪些部分仍需信任设备所有者",
+        "status": "受阻",
+        "source_statuses": {
+          "a": "受阻",
+          "c": "受阻",
+          "d": "实测通过",
+          "e": "受阻",
+          "f": "实测通过"
+        },
+        "notes": [
+          "a environment_survey: 受阻（计数权限未获实测通过（verdict=error））",
+          "c counter_collection: 受阻（计数权限受阻（verdict=error，证据见 counter_permission.evidence））",
+          "d attribution_test: 实测通过（进程级归因可行（smi）；ncu 部分未验证/受阻）",
+          "e replay_overhead: 受阻（计数权限受阻（error），重放实验无法执行）",
+          "f stop_latency: 实测通过（每档间隔均完成；仅进程退出信号可用（每进程/利用率字段不可用））"
+        ]
+      },
+      {
+        "number": 7,
+        "title": "对每项能力给出“实测通过／未覆盖／受阻”",
+        "status": "实测通过",
+        "source_statuses": {
+          "g": "实测通过"
+        },
+        "notes": [
+          "g evidence_report: 实测通过（未运行）"
+        ]
+      }
+    ],
+    "trust_assumptions": [
+      "ncu 存在但 perf counter 权限被拒（ERR_NVGPUCTRPERM 类）：WSL 内核驱动参数由 Windows 侧管理，常规手段无法放开。除非换原生 Linux/放开权限，否则“硬件实测计数”受阻，只能退回估算口径并显式改变计费信任假设。",
+      "所有计量材料（JSONL/CSV/报告）由 Worker 侧生成：核验组织可以校验签名、哈希与重放一致性，但无法从这些文件本身证明“原始执行确实发生过、且只发生这一次”。GPU 用量可信性与 GPU 身份可信性是两个独立问题（spec §7.3 末段）。",
+      "本报告只覆盖单机单卡场景；多 GPU/多提供者的按卡归因与跨集群执行未在本阶段验证，对应能力按“未覆盖”处理，不得默认可用。"
+    ],
+    "experiments_present": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f"
+    ]
+  }
+}

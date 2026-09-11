@@ -1,0 +1,171 @@
+{
+  "experiment": "f_stop_latency",
+  "status": "实测通过",
+  "reason": "每档间隔均完成；仅进程退出信号可用（每进程/利用率字段不可用）",
+  "started_at": "2026-09-11T11:31:52.348956+00:00",
+  "finished_at": "2026-09-11T11:35:48.380545+00:00",
+  "duration_seconds": 236.032,
+  "artifacts": {
+    "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+    "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/f_stop_latency.json",
+    "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+    "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+    "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+    "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+    "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+    "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt",
+    "noise_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep0.txt",
+    "samples_0.1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep0.jsonl",
+    "noise_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep1.txt",
+    "samples_0.1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep1.jsonl",
+    "noise_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep2.txt",
+    "samples_0.1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep2.jsonl",
+    "noise_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep3.txt",
+    "samples_0.1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep3.jsonl",
+    "noise_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_0.1s_rep4.txt",
+    "samples_0.1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_0.1s_rep4.jsonl",
+    "noise_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep0.txt",
+    "samples_1s_rep0": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep0.jsonl",
+    "noise_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep1.txt",
+    "samples_1s_rep1": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep1.jsonl",
+    "noise_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep2.txt",
+    "samples_1s_rep2": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep2.jsonl",
+    "noise_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep3.txt",
+    "samples_1s_rep3": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep3.jsonl",
+    "noise_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_noise_1s_rep4.txt",
+    "samples_1s_rep4": "/home/mohan/depin/experiments/results/20260911T113057Z/f_samples_1s_rep4.jsonl"
+  },
+  "data": {
+    "intervals": {
+      "0.1s": {
+        "interval_seconds": 0.1,
+        "reps": [
+          {
+            "rep": 0,
+            "interval_seconds": 0.1,
+            "t_stop_epoch": 1789126314.3734028,
+            "process_exit_latency_seconds": 0.3761887550354004,
+            "idle_observation": null,
+            "sampler_samples": 226,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 1,
+            "interval_seconds": 0.1,
+            "t_stop_epoch": 1789126336.9304912,
+            "process_exit_latency_seconds": 0.3712756633758545,
+            "idle_observation": null,
+            "sampler_samples": 226,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 2,
+            "interval_seconds": 0.1,
+            "t_stop_epoch": 1789126359.4765973,
+            "process_exit_latency_seconds": 0.3608086109161377,
+            "idle_observation": null,
+            "sampler_samples": 226,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 3,
+            "interval_seconds": 0.1,
+            "t_stop_epoch": 1789126382.028549,
+            "process_exit_latency_seconds": 0.36589860916137695,
+            "idle_observation": null,
+            "sampler_samples": 226,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 4,
+            "interval_seconds": 0.1,
+            "t_stop_epoch": 1789126404.5670667,
+            "process_exit_latency_seconds": 0.36057567596435547,
+            "idle_observation": null,
+            "sampler_samples": 226,
+            "sampler_field_errors": {}
+          }
+        ],
+        "process_exit_latency": {
+          "n": 5,
+          "min": 0.36057567596435547,
+          "median": 0.36589860916137695,
+          "max": 0.3761887550354004
+        },
+        "idle_observation_latency": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null
+        },
+        "observation_methods": [],
+        "note": "观测延迟受采样间隔量化（≤ interval + 处理时延）；NVML 利用率窗口本身有约 1s 惯性，实测值可能大于一个采样周期"
+      },
+      "1s": {
+        "interval_seconds": 1.0,
+        "reps": [
+          {
+            "rep": 0,
+            "interval_seconds": 1.0,
+            "t_stop_epoch": 1789126428.1077685,
+            "process_exit_latency_seconds": 0.5353574752807617,
+            "idle_observation": null,
+            "sampler_samples": 25,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 1,
+            "interval_seconds": 1.0,
+            "t_stop_epoch": 1789126452.7293873,
+            "process_exit_latency_seconds": 0.6533823013305664,
+            "idle_observation": null,
+            "sampler_samples": 25,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 2,
+            "interval_seconds": 1.0,
+            "t_stop_epoch": 1789126477.4721375,
+            "process_exit_latency_seconds": 0.5828161239624023,
+            "idle_observation": null,
+            "sampler_samples": 25,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 3,
+            "interval_seconds": 1.0,
+            "t_stop_epoch": 1789126502.1444826,
+            "process_exit_latency_seconds": 0.5405092239379883,
+            "idle_observation": null,
+            "sampler_samples": 25,
+            "sampler_field_errors": {}
+          },
+          {
+            "rep": 4,
+            "interval_seconds": 1.0,
+            "t_stop_epoch": 1789126526.767822,
+            "process_exit_latency_seconds": 0.5418360233306885,
+            "idle_observation": null,
+            "sampler_samples": 25,
+            "sampler_field_errors": {}
+          }
+        ],
+        "process_exit_latency": {
+          "n": 5,
+          "min": 0.5353574752807617,
+          "median": 0.5418360233306885,
+          "max": 0.6533823013305664
+        },
+        "idle_observation_latency": {
+          "n": 0,
+          "min": null,
+          "median": null,
+          "max": null
+        },
+        "observation_methods": [],
+        "note": "观测延迟受采样间隔量化（≤ interval + 处理时延）；NVML 利用率窗口本身有约 1s 惯性，实测值可能大于一个采样周期"
+      }
+    },
+    "fatal_error": null
+  }
+}

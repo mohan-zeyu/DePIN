@@ -1,0 +1,87 @@
+==> cryptogen 生成证书（输出 /Users/mohan/Downloads/depin/network/organizations）
+user.depin.dev
+verify1.depin.dev
+verify2.depin.dev
+verify3.depin.dev
+arbiter1.depin.dev
+arbiter2.depin.dev
+arbiter3.depin.dev
+==> UserOrg 身份：user1=User1, user2=User2, worker1=User3（复制目录）
+==> configtxgen 生成通道工件（输出 /Users/mohan/Downloads/depin/network/channel-artifacts）
+[34m2026-09-11 21:49:17.284 +08 0001 INFO[0m [common.tools.configtxgen] [34;1mmain[0m -> Loading configuration
+[34m2026-09-11 21:49:17.293 +08 0002 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> orderer type: etcdraft
+[34m2026-09-11 21:49:17.294 +08 0003 INFO[0m [common.tools.configtxgen.localconfig] [34;1mcompleteInitialization[0m -> Orderer.EtcdRaft.Options unset, setting to tick_interval:"500ms" election_tick:10 heartbeat_tick:1 max_inflight_blocks:5 snapshot_interval_size:16777216 
+[34m2026-09-11 21:49:17.294 +08 0004 INFO[0m [common.tools.configtxgen.localconfig] [34;1mLoad[0m -> Loaded configuration: /Users/mohan/Downloads/depin/network/configtx.yaml
+[34m2026-09-11 21:49:17.297 +08 0005 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Generating genesis block
+[34m2026-09-11 21:49:17.297 +08 0006 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Creating system channel genesis block
+[34m2026-09-11 21:49:17.298 +08 0007 INFO[0m [common.tools.configtxgen] [34;1mdoOutputBlock[0m -> Writing genesis block
+[34m2026-09-11 21:49:17.325 +08 0001 INFO[0m [common.tools.configtxgen] [34;1mmain[0m -> Loading configuration
+[34m2026-09-11 21:49:17.330 +08 0002 INFO[0m [common.tools.configtxgen.localconfig] [34;1mLoad[0m -> Loaded configuration: /Users/mohan/Downloads/depin/network/configtx.yaml
+[34m2026-09-11 21:49:17.330 +08 0003 INFO[0m [common.tools.configtxgen] [34;1mdoOutputChannelCreateTx[0m -> Generating new channel configtx
+[34m2026-09-11 21:49:17.334 +08 0004 INFO[0m [common.tools.configtxgen] [34;1mdoOutputChannelCreateTx[0m -> Writing new channel tx
+==> docker compose up -d（orderer/peer/cli；depin-cc 在链码 install 后启动）
+ Network depin_net Creating 
+ Network depin_net Created 
+ Volume network_peer0.user.depin.dev Creating 
+ Volume network_peer0.user.depin.dev Created 
+ Volume network_orderer.depin.dev Creating 
+ Volume network_orderer.depin.dev Created 
+ Container orderer.depin.dev Creating 
+ Container orderer.depin.dev Created 
+ Container peer0.user.depin.dev Creating 
+ Container peer0.user.depin.dev Created 
+ Container depin-cli Creating 
+ Container depin-cli Created 
+ Container orderer.depin.dev Starting 
+ Container orderer.depin.dev Started 
+ Container peer0.user.depin.dev Starting 
+ Container peer0.user.depin.dev Started 
+ Container depin-cli Starting 
+ Container depin-cli Started 
+==> 等待 orderer.depin.dev 健康 (http://localhost:9443/healthz)
+==> orderer.depin.dev 健康
+==> 等待 peer0.user.depin.dev 健康 (http://localhost:9444/healthz)
+==> peer0.user.depin.dev 健康
+==> 等待 orderer Raft leader 选举完成
+==> Raft leader 就绪
+==> 创建通道 depin-channel 并加入 peer0
+[34m2026-09-11 13:49:20.393 UTC 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:20.412 UTC 0002 INFO[0m [cli.common] [34;1mreadBlock[0m -> Expect block, but got status: &{NOT_FOUND}
+[34m2026-09-11 13:49:20.414 UTC 0003 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:20.617 UTC 0004 INFO[0m [cli.common] [34;1mreadBlock[0m -> Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[34m2026-09-11 13:49:20.621 UTC 0005 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:20.828 UTC 0006 INFO[0m [cli.common] [34;1mreadBlock[0m -> Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[34m2026-09-11 13:49:20.836 UTC 0007 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:21.041 UTC 0008 INFO[0m [cli.common] [34;1mreadBlock[0m -> Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[34m2026-09-11 13:49:21.047 UTC 0009 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:21.248 UTC 000a INFO[0m [cli.common] [34;1mreadBlock[0m -> Expect block, but got status: &{SERVICE_UNAVAILABLE}
+[34m2026-09-11 13:49:21.252 UTC 000b INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:21.459 UTC 000c INFO[0m [cli.common] [34;1mreadBlock[0m -> Received block: 0
+[34m2026-09-11 13:49:21.663 UTC 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+[34m2026-09-11 13:49:21.700 UTC 0002 INFO[0m [channelCmd] [34;1mexecuteJoin[0m -> Successfully submitted proposal to join channel
+[34m2026-09-11 13:49:21.893 UTC 0001 INFO[0m [channelCmd] [34;1mInitCmdFactory[0m -> Endorser and orderer connections initialized
+Channels peers has joined: 
+depin-channel
+==> 交叉编译链码（linux/arm64）
+sha256:5c8cfbce09f667b5e80b1af8aa1e82c4b89e23655c8c17a78fde4357e10dbb40
+==> 部署链码 depincc v1.0（CCAAS）
+已生成 external 链码包：/Users/mohan/Downloads/depin/network/channel-artifacts/depincc_1.0-ccaas.tar.gz（address=depin-cc:9999）
+[34m2026-09-11 13:49:23.133 UTC 0001 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Installed remotely: response:<status:200 payload:"\nLdepincc_1.0:764d60197fae51cc279a990d49832a825d2d1cf920b7f6fdfaa558843a962d6c\022\013depincc_1.0" > 
+[34m2026-09-11 13:49:23.133 UTC 0002 INFO[0m [cli.lifecycle.chaincode] [34;1msubmitInstallProposal[0m -> Chaincode code package identifier: depincc_1.0:764d60197fae51cc279a990d49832a825d2d1cf920b7f6fdfaa558843a962d6c
+==> Package ID: depincc_1.0:764d60197fae51cc279a990d49832a825d2d1cf920b7f6fdfaa558843a962d6c
+ Container depin-cc Creating 
+ Container depin-cc Created 
+ Container depin-cc Starting 
+ Container depin-cc Started 
+[34m2026-09-11 13:49:27.921 UTC 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [abc368823da72f769311d9411eda361f4465a5a9b72f9da85d2794605f4f8dce] committed with status (VALID) at peer0.user.depin.dev:7051
+[34m2026-09-11 13:49:30.360 UTC 0001 INFO[0m [chaincodeCmd] [34;1mClientWait[0m -> txid [267e0b9219e527941394e66a1f11b79b5782224600590d37005b336ae0cd6100] committed with status (VALID) at peer0.user.depin.dev:7051
+Committed chaincode definitions on channel 'depin-channel':
+Name: depincc, Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc
+==> 调用 depincc:Init 与 GetPolicy 冒烟验证
+[34m2026-09-11 13:49:30.760 UTC 0001 INFO[0m [chaincodeCmd] [34;1mchaincodeInvokeOrQuery[0m -> Chaincode invoke successful. result: status:200 
+{"policyVersion":1,"verification":{"orgs":["Verify1Org","Verify2Org","Verify3Org"],"threshold":2},"arbitration":{"orgs":["Arbiter1Org","Arbiter2Org","Arbiter3Org"],"threshold":2},"setsDisjoint":true}
+
+==> 网络就绪：通道 depin-channel，链码 depincc 已提交并初始化。
+    冒烟（WhoAmI，UserOrg Admin）：
+    docker compose -f /Users/mohan/Downloads/depin/network/docker-compose.yaml exec cli peer chaincode query -C depin-channel -n depincc -c '{"function":"depin:WhoAmI","Args":[]}'
+    停止：network/scripts/down.sh

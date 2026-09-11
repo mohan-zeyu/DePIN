@@ -1,0 +1,272 @@
+{
+  "fp32": {
+    "estimation_method": "torch.profiler with_flops=True：基于算子输入 shape 的公式推导估算，不是硬件计数器实测（spec §7.1：性能分析工具的公式估算不能标为硬件实测）",
+    "precision": "fp32",
+    "batches": 8,
+    "batch_size": 64,
+    "top_events_by_flops": [
+      {
+        "name": "aten::conv2d",
+        "self_cuda_time_us": 0.0,
+        "cpu_time_us": 81.54800000000432,
+        "flops_estimate": 1660944384,
+        "calls": 16
+      },
+      {
+        "name": "aten::addmm",
+        "self_cuda_time_us": 51.039999999999964,
+        "cpu_time_us": 744.8509999999933,
+        "flops_estimate": 20971520,
+        "calls": 8
+      },
+      {
+        "name": "aten::cudnn_convolution",
+        "self_cuda_time_us": 795.3099999999959,
+        "cpu_time_us": 2025.3469999999943,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "_5x_cudnn_ampere_scudnn_128x64_relu_xregs_large_nn_v1",
+        "self_cuda_time_us": 523.2229999999954,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "aten::copy_",
+        "self_cuda_time_us": 480.95000000000255,
+        "cpu_time_us": 179.8339999999962,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "Memcpy HtoD (Pageable -> Device)",
+        "self_cuda_time_us": 480.95000000000255,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "aten::max_pool2d_with_indices",
+        "self_cuda_time_us": 180.79499999999553,
+        "cpu_time_us": 387.994999999999,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::(anonymous namespace)::max_pool_forward_nchw<float, int>(int, float const*, long, long, long, int, int, int, int, int, int, int, int, int, int, float*, long*)",
+        "self_cuda_time_us": 180.79499999999553,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_tf32f32_tf32f32_f32_nhwckrsc_nhwc_tilesize128x32x64_stage1_warpsize4x1x1_g1_tensor16x8x8_alignc4_execute_kernel__5x_cudnn",
+        "self_cuda_time_us": 176.31500000000142,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "aten::add_",
+        "self_cuda_time_us": 151.386999999997,
+        "cpu_time_us": 397.91199999999753,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<float> const&)::{lambda(int)#1})",
+        "self_cuda_time_us": 151.386999999997,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "aten::clamp_min",
+        "self_cuda_time_us": 79.54899999999907,
+        "cpu_time_us": 323.6540000000032,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>, false>(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#7}::operator()() const::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "self_cuda_time_us": 79.54899999999907,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void cudnn::engines_precompiled::nchwToNhwcKernel<float, float, float, false, true, (cudnnKernelDataType_t)2>(cudnn::engines_precompiled::nchw2nhwc_params_t<float>, float const*, float*)",
+        "self_cuda_time_us": 45.981000000002496,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void cudnn::engines_precompiled::nhwcToNchwKernel<float, float, float, true, false, (cudnnKernelDataType_t)0>(cudnn::engines_precompiled::nhwc2nchw_params_t<float>, float const*, float*)",
+        "self_cuda_time_us": 40.06299999999919,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "ampere_sgemm_32x32_sliced1x4_tn",
+        "self_cuda_time_us": 36.000999999999294,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "void cublasLt::splitKreduce_kernel<32, 16, int, float, float, float, float, false, float, float, float, true, true, false, false>(cublasLt::cublasSplitKParams<float>, float const*, float const*, float*, float*, float const*, float const*, float const*, float const*, float*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+        "self_cuda_time_us": 15.03900000000067,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "void cask__5x_cudnn::computeOffsetsKernel<false, false>(cask__5x_cudnn::ComputeOffsetsParams)",
+        "self_cuda_time_us": 9.727999999997337,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      }
+    ],
+    "total_flops_estimate": 1681915904
+  },
+  "fp16": {
+    "estimation_method": "torch.profiler with_flops=True：基于算子输入 shape 的公式推导估算，不是硬件计数器实测（spec §7.1：性能分析工具的公式估算不能标为硬件实测）",
+    "precision": "fp16",
+    "batches": 8,
+    "batch_size": 64,
+    "top_events_by_flops": [
+      {
+        "name": "aten::conv2d",
+        "self_cuda_time_us": 0.0,
+        "cpu_time_us": 461.7160000000031,
+        "flops_estimate": 3321888768,
+        "calls": 32
+      },
+      {
+        "name": "aten::addmm",
+        "self_cuda_time_us": 35.12600000000339,
+        "cpu_time_us": 612.8210000000036,
+        "flops_estimate": 20971520,
+        "calls": 8
+      },
+      {
+        "name": "aten::copy_",
+        "self_cuda_time_us": 543.3849999999859,
+        "cpu_time_us": 774.4149999999953,
+        "flops_estimate": 0,
+        "calls": 64
+      },
+      {
+        "name": "Memcpy HtoD (Pageable -> Device)",
+        "self_cuda_time_us": 480.52100000000087,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "aten::cudnn_convolution",
+        "self_cuda_time_us": 475.0500000000013,
+        "cpu_time_us": 1396.7339999999958,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void implicit_convolve_sgemm<__half, __half, int, 1024, 5, 5, 3, 3, 3, 1, false, false, true>(int, int, int, __half const*, int, __half*, __half const*, kernel_conv_params, unsigned long long, int, float, float, int, __half const*, __half const*, bool, bool, int, int)",
+        "self_cuda_time_us": 297.6399999999992,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "aten::max_pool2d_with_indices",
+        "self_cuda_time_us": 185.75599999999804,
+        "cpu_time_us": 347.13800000000356,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::(anonymous namespace)::max_pool_forward_nchw<c10::Half, int>(int, c10::Half const*, long, long, long, int, int, int, int, int, int, int, int, int, int, c10::Half*, long*)",
+        "self_cuda_time_us": 185.75599999999804,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "aten::add_",
+        "self_cuda_time_us": 147.49299999999903,
+        "cpu_time_us": 323.6839999999943,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::Half> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<c10::Half> const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::Half> >(at::TensorIteratorBase&, at::native::CUDAFunctor_add<c10::Half> const&)::{lambda(int)#1})",
+        "self_cuda_time_us": 147.49299999999903,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "sm80_xmma_fprop_implicit_gemm_indexed_wo_smem_f16f16_f16f32_f32_nhwckrsc_nhwc_tilesize128x32x64_stage1_warpsize4x1x1_g1_tensor16x8x16_alignc8_execute_kernel__5x_cudnn",
+        "self_cuda_time_us": 95.31299999999874,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::float16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>, false>(int, at::native::float16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "self_cuda_time_us": 62.863999999985026,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 56
+      },
+      {
+        "name": "aten::clamp_min",
+        "self_cuda_time_us": 52.661999999994805,
+        "cpu_time_us": 318.2120000000018,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(c10::Half)#1}, std::array<char*, 2ul>, false>(int, at::native::(anonymous namespace)::launch_clamp_scalar(at::TensorIteratorBase&, c10::Scalar, c10::Scalar, at::native::detail::ClampLimits)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(c10::Half)#1}, std::array<char*, 2ul>)",
+        "self_cuda_time_us": 52.661999999994805,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void cudnn::engines_precompiled::nchwToNhwcKernel<__half, __half, float, false, true, (cudnnKernelDataType_t)0>(cudnn::engines_precompiled::nchw2nhwc_params_t<float>, __half const*, __half*)",
+        "self_cuda_time_us": 44.66400000000249,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 16
+      },
+      {
+        "name": "void cudnn::engines_precompiled::nhwcToNchwKernel<__half, __half, float, true, false, (cudnnKernelDataType_t)0>(cudnn::engines_precompiled::nhwc2nchw_params_t<float>, __half const*, __half*)",
+        "self_cuda_time_us": 37.4330000000009,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "void cutlass::Kernel2<cutlass_80_wmma_tensorop_f16_s161616gemm_f16_32x32_128x2_tn_align2>(cutlass_80_wmma_tensorop_f16_s161616gemm_f16_32x32_128x2_tn_align2::Params)",
+        "self_cuda_time_us": 21.146000000002005,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      },
+      {
+        "name": "void cublasLt::splitKreduce_kernel<32, 16, int, __half, __half, float, __half, false, __half, __half, __half, true, true, false, false>(cublasLt::cublasSplitKParams<float>, __half const*, __half const*, __half*, __half*, float const*, float const*, __half const*, __half const*, __half*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+        "self_cuda_time_us": 13.980000000001382,
+        "cpu_time_us": 0,
+        "flops_estimate": 0,
+        "calls": 8
+      }
+    ],
+    "total_flops_estimate": 3342860288
+  }
+}

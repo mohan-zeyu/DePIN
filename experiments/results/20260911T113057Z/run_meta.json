@@ -1,0 +1,62 @@
+{
+  "started_at": "2026-09-11T11:30:57.614383+00:00",
+  "argv": [
+    "run_experiment.py"
+  ],
+  "selection": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g"
+  ],
+  "options": {
+    "seed": 20260911,
+    "batch_size": 64,
+    "precisions": [
+      "fp32",
+      "fp16",
+      "bf16"
+    ],
+    "train_steps": 200,
+    "infer_batches": 50,
+    "counter_steps": 12,
+    "counter_batches": 8,
+    "replay_batches": 10,
+    "attribution_train_steps": 80,
+    "attribution_noise_seconds": 90.0,
+    "stop_intervals": [
+      0.1,
+      1.0
+    ],
+    "stop_reps": 5,
+    "stop_warmup_seconds": 2.0,
+    "stop_timeout_seconds": 20.0,
+    "subprocess_timeout": 900.0,
+    "device": "cuda"
+  },
+  "gpu_gate": {
+    "passed": true,
+    "details": {
+      "checks": {
+        "nvml_probe": "ok",
+        "torch_cuda_available": true,
+        "torch_version": "2.14.0+cu130",
+        "torch_device_0": "NVIDIA GeForce RTX 4060 Laptop GPU"
+      },
+      "gpu_probe": {
+        "gpu_present": true,
+        "is_wsl": true,
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "uuid": "GPU-81dc8519-806a-0d83-324d-3b0e235ceac9",
+        "driver_version": "616.56",
+        "memory_total_bytes": 8585740288,
+        "compute_capability": "8.9",
+        "nvidia_smi_found": true
+      }
+    }
+  },
+  "allow_no_gpu": false
+}

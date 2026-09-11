@@ -1,0 +1,69 @@
+# CI — 分层验证（对应 issue #13 验收分层）：
+#   tier1: 无 GPU 逻辑测试（两个 Go module），必须通过；
+#   tier2: Fabric 集成（需要 docker），仅 workflow_dispatch 手动触发；
+#   tier3: GPU 实验（self-hosted GPU runner），仅 workflow_dispatch 手动触发，
+#          且需仓库变量 GPU_RUNNER_ENABLED=true；缺失时 job 显示为 skipped，
+#          【不会显示为通过】，GPU 结论只有该 job 真正运行过才算验证。
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  tier1-logic:
+    name: tier1 逻辑测试（无 GPU，必过）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          # backend 依赖 fabric-gateway v1.12.1 要求 go >= 1.25
+          go-version: "1.26"
+          cache-dependency-path: |
+            chaincode/depin/go.sum
+            backend/go.sum
+
+      - name: 链码 build + vet + test
+        run: cd chaincode/depin && go build ./... && go vet ./... && go test -v ./...
+
+      - name: 后端 build + vet + test
+        run: cd backend && go build ./... && go vet ./... && go test -v ./...
+
+  tier2-fabric-integration:
+    name: tier2 Fabric 集成（needs docker，仅手动触发）
+    needs: tier1-logic
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查 docker 可用
+        run: docker version && docker compose version
+
+      - name: 下载 fabric 二进制与镜像
+        run: make bootstrap
+
+      - name: 起网 → 部署链码 → 冒烟 → 清理
+        run: make test-integration
+
+  tier3-gpu:
+    name: tier3 GPU 实验（self-hosted GPU，缺失时 skip）
+    needs: tier1-logic
+    # 仅手动触发且仓库变量 GPU_RUNNER_ENABLED=true 才排队；
+    # 无 self-hosted GPU runner 时该 job 直接显示为 skipped（灰色），不显示为通过。
+    if: github.event_name == 'workflow_dispatch' && vars.GPU_RUNNER_ENABLED == 'true'
+    runs-on: [self-hosted, gpu]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 检查 NVIDIA GPU 与驱动
+        run: |
+          command -v nvidia-smi >/dev/null || { echo "错误：self-hosted GPU runner 上未找到 nvidia-smi"; exit 1; }
+          nvidia-smi
+
+      - name: 运行 GPU 实验
+        run: make test-gpu

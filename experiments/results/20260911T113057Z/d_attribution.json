@@ -1,0 +1,734 @@
+{
+  "nvidia_smi": {
+    "found": true,
+    "path": "/usr/lib/wsl/lib/nvidia-smi"
+  },
+  "nvml_per_process": {
+    "available": true,
+    "error": null
+  },
+  "baseline": {
+    "smi": {
+      "pids": [
+        6141
+      ]
+    },
+    "nvml": {
+      "available": true,
+      "processes": [
+        {
+          "pid": 6141,
+          "used_memory_bytes": 0
+        }
+      ]
+    }
+  },
+  "pids": {
+    "workload": 6337,
+    "noise": 6304
+  },
+  "samples": [
+    {
+      "t": 1789126280.933,
+      "smi_pids": [
+        6141
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126281.204,
+      "smi_pids": [
+        6141
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126281.483,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126281.769,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126282.101,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126282.37,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126282.665,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126282.94,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126283.202,
+      "smi_pids": [
+        6141,
+        6304
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126283.47,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126283.748,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126284.021,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126284.299,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126284.575,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126284.844,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126285.11,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126285.383,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126285.645,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126285.919,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126286.196,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126286.474,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126286.775,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126287.061,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126287.335,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    },
+    {
+      "t": 1789126287.601,
+      "smi_pids": [
+        6141,
+        6304,
+        6337
+      ],
+      "smi_rows_raw": [
+        "6141, [Not Found], [N/A]",
+        "6304, [Not Found], [N/A]",
+        "6337, [Not Found], [N/A]"
+      ],
+      "nvml": {
+        "available": true,
+        "processes": [
+          {
+            "pid": 6141,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6304,
+            "used_memory_bytes": 0
+          },
+          {
+            "pid": 6337,
+            "used_memory_bytes": 0
+          }
+        ]
+      }
+    }
+  ],
+  "concurrent_attribution": {
+    "nvidia_smi_query_compute_apps_separated": true,
+    "nvml_per_process_separated": true,
+    "nvml_per_process_available": true,
+    "sample_count": 25
+  },
+  "ncu_target_only": {
+    "tested": false,
+    "blocked_reason": "计数权限受阻（error）"
+  },
+  "conclusions": {
+    "per_task_attribution": "进程级归因可行：nvidia-smi 与NVML 每进程 API 可区分负载与干扰进程",
+    "kernel_level": "ncu 部分未验证/受阻",
+    "caveats": [
+      "pid/进程名/显存占用均由驱动自报，核验方需独立读取才能防伪造报告（spec §7.3-5/6）",
+      "WSL 上 NVML 每进程 API 与 nvidia-smi --query-compute-apps 可能受限，本实验如实记录实测结果"
+    ]
+  }
+}

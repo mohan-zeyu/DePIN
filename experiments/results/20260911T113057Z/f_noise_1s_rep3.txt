@@ -1,0 +1,3 @@
+/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+RESULT_JSON={"status": "ok", "reason": "terminated by signal 15", "iterations": 1, "matrix_size": 2048, "seconds": 0.2122339119996468, "matmuls_per_second": 4.711782347025032, "sample_checksum": 0.0}

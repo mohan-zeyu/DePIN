@@ -1,0 +1,65 @@
+{
+  "experiment": "c_counter_collection",
+  "status": "受阻",
+  "reason": "计数权限受阻（verdict=error，证据见 counter_permission.evidence）",
+  "started_at": "2026-09-11T11:31:12.567498+00:00",
+  "finished_at": "2026-09-11T11:31:18.825812+00:00",
+  "duration_seconds": 6.258,
+  "artifacts": {
+    "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+    "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/c_counter_collection.json",
+    "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+    "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+    "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+    "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json"
+  },
+  "data": {
+    "precision_support": {
+      "fp32": true,
+      "fp16": true,
+      "bf16": true,
+      "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "compute_capability": "8.9"
+    },
+    "ncu": {
+      "found": true,
+      "path": "/home/mohan/opt/nsight-compute/ncu",
+      "discovery_evidence": [
+        "PATH 命中：/home/mohan/opt/nsight-compute/ncu"
+      ],
+      "wanted_metrics": [
+        "sm__inst_executed_pipe_fp64",
+        "sm__inst_executed_pipe_fp32",
+        "sm__inst_executed_pipe_fp16",
+        "sm__inst_executed_pipe_alu",
+        "sm__pipe_tensor_op_hmma_cycles_active",
+        "sm__inst_executed_pipe_tensor_op_hmma",
+        "sm__inst_executed_pipe_tensor_op_imma",
+        "sm__pipe_tensor_cycles_active",
+        "sm__cycles_elapsed",
+        "sm__cycles_active",
+        "gpu__time_duration"
+      ],
+      "counter_permission": {
+        "verdict": "error",
+        "returncode": 1,
+        "timed_out": false,
+        "profiled_rows": 0,
+        "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+        "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+      },
+      "blocked_reason": "计数权限受阻（verdict=error，证据见 counter_permission.evidence）"
+    },
+    "torch_profiler_estimates": {
+      "warning": "torch.profiler with_flops=True 的 FLOPs 是 shape 推导估算，不是硬件实测（spec §7.1）；仅作交叉参考，不得用于计费口径",
+      "per_precision": {
+        "fp32": {
+          "total_flops_estimate": 1681915904
+        },
+        "fp16": {
+          "total_flops_estimate": 3342860288
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+# ---- Go ----
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+coverage.out
+coverage.html
+# go build ./... 在模块根产生的裸二进制
+/chaincode/depin/depin
+
+# ---- Python（worker / experiments）----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Fabric 网络生成物（network/scripts 生成，勿入库）----
+network/bin/
+network/config/
+network/organizations/
+network/channel-artifacts/
+
+# ---- 实验产物 ----
+experiments/results/
+
+# ---- IDE / 系统 ----
+.idea/
+.vscode/
+.DS_Store
+
+# CCAAS 链码构建产物
+network/build/

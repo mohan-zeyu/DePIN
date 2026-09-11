@@ -1,0 +1,153 @@
+{
+  "workload": "small-cnn-cifar-like",
+  "ops": [
+    {
+      "op": "conv2d",
+      "layer": "conv1",
+      "weight_shape": [
+        16,
+        3,
+        3,
+        3
+      ],
+      "bias_shape": [
+        16
+      ],
+      "input_shape": [
+        64,
+        3,
+        32,
+        32
+      ],
+      "output_shape": [
+        64,
+        16,
+        32,
+        32
+      ]
+    },
+    {
+      "op": "relu",
+      "layer": "relu1",
+      "input_shape": [
+        64,
+        16,
+        32,
+        32
+      ]
+    },
+    {
+      "op": "max_pool2d",
+      "layer": "pool1",
+      "kernel": 2,
+      "input_shape": [
+        64,
+        16,
+        32,
+        32
+      ],
+      "output_shape": [
+        64,
+        16,
+        16,
+        16
+      ]
+    },
+    {
+      "op": "conv2d",
+      "layer": "conv2",
+      "weight_shape": [
+        32,
+        16,
+        3,
+        3
+      ],
+      "bias_shape": [
+        32
+      ],
+      "input_shape": [
+        64,
+        16,
+        16,
+        16
+      ],
+      "output_shape": [
+        64,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "op": "relu",
+      "layer": "relu2",
+      "input_shape": [
+        64,
+        32,
+        16,
+        16
+      ]
+    },
+    {
+      "op": "max_pool2d",
+      "layer": "pool2",
+      "kernel": 2,
+      "input_shape": [
+        64,
+        32,
+        16,
+        16
+      ],
+      "output_shape": [
+        64,
+        32,
+        8,
+        8
+      ]
+    },
+    {
+      "op": "flatten",
+      "layer": "flatten",
+      "input_shape": [
+        64,
+        32,
+        8,
+        8
+      ],
+      "output_shape": [
+        64,
+        2048
+      ]
+    },
+    {
+      "op": "linear(gemm+bias)",
+      "layer": "fc",
+      "weight_shape": [
+        10,
+        2048
+      ],
+      "bias_shape": [
+        10
+      ],
+      "input_shape": [
+        64,
+        2048
+      ],
+      "output_shape": [
+        64,
+        10
+      ]
+    },
+    {
+      "op": "cross_entropy(log_softmax+nll)",
+      "layer": "loss",
+      "input_shape": [
+        64,
+        10
+      ],
+      "target_shape": [
+        64
+      ]
+    }
+  ]
+}

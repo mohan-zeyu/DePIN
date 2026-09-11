@@ -1,0 +1,60 @@
+{
+  "system": {
+    "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "python": "3.12.14",
+    "python_executable": "/home/mohan/depin/.venv/bin/python3",
+    "os_release": "Ubuntu 26.04 LTS"
+  },
+  "wsl": {
+    "is_wsl": true,
+    "evidence": [
+      "/proc/version 含 'microsoft'：Linux version 6.18.33.2-microsoft-standard-WSL2 (root@f1bbfb02316b) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UT",
+      "目录 /mnt/c/Windows 存在",
+      "目录 /usr/lib/wsl/lib 存在（WSL GPU 驱动库挂载点）"
+    ]
+  },
+  "gpu": {
+    "gpu_present": true,
+    "is_wsl": true,
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "uuid": "GPU-81dc8519-806a-0d83-324d-3b0e235ceac9",
+    "driver_version": "616.56",
+    "memory_total_bytes": 8585740288,
+    "compute_capability": "8.9",
+    "nvidia_smi_found": true,
+    "nvml_unavailable_fields_example": []
+  },
+  "torch": {
+    "available": true,
+    "torch_version": "2.14.0+cu130",
+    "cuda_runtime": "13.0",
+    "cudnn": 92400,
+    "cuda_available": true,
+    "device_count": 1,
+    "device_0": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "bf16_supported": true,
+    "compute_capability": "8.9"
+  },
+  "ncu": {
+    "found": true,
+    "path": "/home/mohan/opt/nsight-compute/ncu",
+    "discovery_evidence": [
+      "PATH 命中：/home/mohan/opt/nsight-compute/ncu"
+    ],
+    "version": {
+      "returncode": 0,
+      "stdout": "NVIDIA (R) Nsight Compute Command Line Profiler\nCopyright (c) 2018-2025 NVIDIA Corporation\nVersion 2025.1.1.0 (build 35528883) (public-release)\n",
+      "stderr": ""
+    }
+  },
+  "counter_permission": {
+    "verdict": "error",
+    "returncode": 1,
+    "timed_out": false,
+    "profiled_rows": 0,
+    "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+    "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+  }
+}

@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ncu_permission_probe.csv
+results/
+uv.lock

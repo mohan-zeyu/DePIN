@@ -1,0 +1,248 @@
+# configtx.yaml — 生成 depin 网络的 genesis block（etcdRaft）与通道 depin-channel。
+# 路径相对于 network/（up.sh 以 FABRIC_CFG_PATH=<network 目录> 运行 configtxgen）。
+#
+# 组织全表（8 个）：
+#   OrdererOrg        orderer.depin.dev（排序）
+#   UserOrg           user.depin.dev（唯一运行 peer 的组织）
+#   Verify1/2/3Org    verify1/2/3.depin.dev（核验）
+#   Arbiter1/2/3Org   arbiter1/2/3.depin.dev（仲裁）
+# 通道 depin-channel 的成员包含全部 7 个非排序组织：
+# 核验/仲裁组织没有自己的 peer，但保留 channel 成员资格与 MSP 身份，
+# 通过 peer0.user.depin.dev 提交交易，链码内按 MSP 做组织门禁。
+
+Organizations:
+  - &OrdererOrg
+    Name: OrdererOrg
+    ID: OrdererOrg
+    MSPDir: organizations/ordererOrganizations/depin.dev/msp
+    # 2.5 通道内 orderer 地址来源；缺失时 peer 报 "no endpoints currently defined"
+    OrdererEndpoints:
+      - orderer.depin.dev:7050
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('OrdererOrg.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('OrdererOrg.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('OrdererOrg.admin')"
+
+  - &UserOrg
+    Name: UserOrg
+    ID: UserOrg
+    MSPDir: organizations/peerOrganizations/user.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('UserOrg.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('UserOrg.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('UserOrg.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('UserOrg.peer', 'UserOrg.admin')"
+
+  - &Verify1Org
+    Name: Verify1Org
+    ID: Verify1Org
+    MSPDir: organizations/peerOrganizations/verify1.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Verify1Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Verify1Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Verify1Org.admin')"
+
+  - &Verify2Org
+    Name: Verify2Org
+    ID: Verify2Org
+    MSPDir: organizations/peerOrganizations/verify2.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Verify2Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Verify2Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Verify2Org.admin')"
+
+  - &Verify3Org
+    Name: Verify3Org
+    ID: Verify3Org
+    MSPDir: organizations/peerOrganizations/verify3.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Verify3Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Verify3Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Verify3Org.admin')"
+
+  - &Arbiter1Org
+    Name: Arbiter1Org
+    ID: Arbiter1Org
+    MSPDir: organizations/peerOrganizations/arbiter1.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Arbiter1Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Arbiter1Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Arbiter1Org.admin')"
+
+  - &Arbiter2Org
+    Name: Arbiter2Org
+    ID: Arbiter2Org
+    MSPDir: organizations/peerOrganizations/arbiter2.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Arbiter2Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Arbiter2Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Arbiter2Org.admin')"
+
+  - &Arbiter3Org
+    Name: Arbiter3Org
+    ID: Arbiter3Org
+    MSPDir: organizations/peerOrganizations/arbiter3.depin.dev/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Arbiter3Org.member')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Arbiter3Org.member')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Arbiter3Org.admin')"
+
+Capabilities:
+  Channel: &ChannelCapabilities
+    V2_0: true
+  Orderer: &OrdererCapabilities
+    V2_0: true
+  Application: &ApplicationCapabilities
+    V2_5: true
+
+Application: &ApplicationDefaults
+  Organizations:
+  # 每个 org 在创建通道时通过 Profile 注入。
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    # stage-1 只有 UserOrg 运行 peer：生命周期与背书策略固定为 UserOrg 单组织。
+    # 组织门禁（核验/仲裁只能投本角色票）由链码 depincc 内部执行。
+    LifecycleEndorsement:
+      Type: Signature
+      Rule: "OR('UserOrg.peer', 'UserOrg.admin')"
+    Endorsement:
+      Type: Signature
+      Rule: "OR('UserOrg.peer', 'UserOrg.admin')"
+  Capabilities:
+    <<: *ApplicationCapabilities
+
+Orderer: &OrdererDefaults
+  OrdererType: etcdraft
+  BatchTimeout: 2s
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 10 MB
+    PreferredMaxBytes: 2 MB
+  EtcdRaft:
+    Consenters:
+      - Host: orderer.depin.dev
+        Port: 7050
+        ClientTLSCert: organizations/ordererOrganizations/depin.dev/orderers/orderer.depin.dev/tls/server.crt
+        ServerTLSCert: organizations/ordererOrganizations/depin.dev/orderers/orderer.depin.dev/tls/server.crt
+  Organizations:
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+    BlockValidation:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+
+Channel: &ChannelDefaults
+  Policies:
+    Readers:
+      Type: ImplicitMeta
+      Rule: "ANY Readers"
+    Writers:
+      Type: ImplicitMeta
+      Rule: "ANY Writers"
+    Admins:
+      Type: ImplicitMeta
+      Rule: "MAJORITY Admins"
+  Capabilities:
+    <<: *ChannelCapabilities
+
+Profiles:
+  # 生成 orderer genesis block（系统通道，含 DepinConsortium 全部 7 个组织）。
+  DepinOrdererGenesis:
+    <<: *ChannelDefaults
+    Orderer:
+      <<: *OrdererDefaults
+      Organizations:
+        - *OrdererOrg
+      Capabilities: *OrdererCapabilities
+    Consortiums:
+      DepinConsortium:
+        Organizations:
+          - *UserOrg
+          - *Verify1Org
+          - *Verify2Org
+          - *Verify3Org
+          - *Arbiter1Org
+          - *Arbiter2Org
+          - *Arbiter3Org
+
+  # 生成通道 depin-channel 的创建交易。
+  DepinChannel:
+    Consortium: DepinConsortium
+    <<: *ChannelDefaults
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *UserOrg
+        - *Verify1Org
+        - *Verify2Org
+        - *Verify3Org
+        - *Arbiter1Org
+        - *Arbiter2Org
+        - *Arbiter3Org
+      Capabilities: *ApplicationCapabilities

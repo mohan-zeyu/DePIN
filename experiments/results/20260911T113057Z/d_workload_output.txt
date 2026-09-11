@@ -1,0 +1,4 @@
+/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+train[fp32] step 50/80 loss=2.2825
+RESULT_JSON={"workload": "small-cnn-cifar-like", "mode": "train", "precision": "fp32", "seed": 20260911, "train": {"status": "ok", "precision": "fp32", "steps": 80, "batch_size": 64, "seed": 20260911, "first_loss": 2.320725679397583, "final_loss": 2.2198870182037354, "mean_loss_last10": 2.2047134160995485, "loss_decreased": true, "seconds": 1.289844783001172, "steps_per_second": 62.02296668119897, "loss_every_log": [2.320725679397583, 2.228057384490967]}}

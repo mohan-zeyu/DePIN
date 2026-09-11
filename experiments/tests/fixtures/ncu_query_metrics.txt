@@ -1,0 +1,20 @@
+==PROF== Connected to process 83155 ([python])
+Metric Name                                       Metric Unit   Description
+------------------------------------------------  ------------  ------------------------------------------------------------
+gpu__time_duration                                nsecond       Duration of all active cycles
+sm__cycles_elapsed                                cycle         Elapsed cycles
+sm__cycles_active                                 cycle         Cycles during which the SM was active
+sm__inst_executed                                 inst          Number of instructions executed
+sm__inst_executed_pipe_fp64                       inst          Number of instructions executed by the fp64 pipe
+sm__inst_executed_pipe_fp32                       inst          Number of instructions executed by the fp32 pipe
+sm__inst_executed_pipe_alu                        inst          Number of instructions executed by the alu pipe
+sm__pipe_tensor_op_hmma_cycles_active             cycle         Cycles during which the hmma tensor pipe was active
+sm__inst_executed_pipe_tensor_op_hmma             inst          Number of hmma tensor instructions executed
+sm__inst_executed_pipe_tensor_op_imma             inst          Number of imma tensor instructions executed
+sm__pipe_tensor_cycles_active                     cycle         Cycles during which the tensor pipe was active
+derived__memory_throughput                        %             Memory throughput percentage
+
+Section: Memory Workload Analysis
+Memory Throughput                                 %             Memory throughput relative to peak
+
+Note: descriptions may reference other metrics like sm__cycles_elapsed in prose.

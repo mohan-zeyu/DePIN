@@ -1,0 +1,24 @@
+# GPU 计量可行性实验依赖（stage-1，issue #13 / spec §7.3）
+#
+# torch 使用 CUDA 版 Linux 轮子。安装请优先运行 setup_wsl.sh（uv 项目模式，
+# 默认走清华 PyPI 镜像 uv add；也可用 UV_DEFAULT_INDEX 环境变量换镜像）。
+#
+#   ./setup_wsl.sh
+#
+# 手动安装（等效）：
+#   export UV_DEFAULT_INDEX=https://pypi.tuna.tsinghua.edu.cn/simple
+#   uv venv --python 3.12
+#   uv add "torch>=2.4" "pynvml>=11.5"
+#   uv add nvidia-nsight-compute   # 装不上会如实报错（见 setup_wsl.sh）
+#
+# 如需官方 CUDA 专用 index（cu128 等），可用：
+#   uv add torch --index https://download.pytorch.org/whl/cu128
+
+torch>=2.4
+pynvml>=11.5
+
+# Nsight Compute CLI 的 pip wheel（提供 ncu 可执行文件）。
+# 注意：该 wheel 并非所有平台都有；装不上时 setup_wsl.sh 会明确失败，
+# experiments 的 counter_collection / replay_overhead / attribution 的 ncu
+# 部分会如实记录为“受阻”，不会假装成功。
+nvidia-nsight-compute

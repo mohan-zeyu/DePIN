@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "probed_at": "2026-09-11T11:30:57.619119+00:00",
+  "python_version": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
+  "platform": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "machine": "x86_64",
+  "wsl": {
+    "is_wsl": true,
+    "evidence": [
+      "/proc/version 含 'microsoft'：Linux version 6.18.33.2-microsoft-standard-WSL2 (root@f1bbfb02316b) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UT",
+      "目录 /mnt/c/Windows 存在",
+      "目录 /usr/lib/wsl/lib 存在（WSL GPU 驱动库挂载点）"
+    ]
+  },
+  "nvidia_smi": {
+    "found": true,
+    "path": "/usr/lib/wsl/lib/nvidia-smi",
+    "known_locations_checked": [
+      "/usr/lib/wsl/lib/nvidia-smi",
+      "/usr/bin/nvidia-smi",
+      "/usr/local/bin/nvidia-smi",
+      "/usr/local/cuda/bin/nvidia-smi",
+      "/usr/lib/linux-nvidia/nvidia-smi",
+      "/snap/bin/nvidia-smi"
+    ]
+  },
+  "nvml": {
+    "library_available": true,
+    "init": {
+      "status": "ok"
+    },
+    "device_count": 1,
+    "devices": [
+      {
+        "index": 0,
+        "name": {
+          "status": "ok",
+          "value": "NVIDIA GeForce RTX 4060 Laptop GPU"
+        },
+        "uuid": {
+          "status": "ok",
+          "value": "GPU-81dc8519-806a-0d83-324d-3b0e235ceac9"
+        },
+        "memory_total_bytes": {
+          "status": "ok",
+          "value": 8585740288
+        },
+        "memory_used_bytes": {
+          "status": "ok",
+          "value": 243269632
+        },
+        "compute_capability": {
+          "status": "ok",
+          "value": "8.9"
+        },
+        "temperature_c": {
+          "status": "ok",
+          "value": 49.0
+        },
+        "power_draw_w": {
+          "status": "ok",
+          "value": 23.594
+        },
+        "power_limit_w": {
+          "status": "ok",
+          "value": 112.634
+        },
+        "utilization": {
+          "status": "ok",
+          "value": {
+            "gpu_percent": 0,
+            "memory_percent": 0
+          }
+        },
+        "clocks_sm_mhz": {
+          "status": "ok",
+          "value": 2370
+        },
+        "per_process": {
+          "status": "ok",
+          "value": []
+        },
+        "unavailable_fields": []
+      }
+    ],
+    "module": "pynvml",
+    "driver_version": {
+      "status": "ok",
+      "value": "616.56"
+    }
+  },
+  "nvidia_smi_probe": {
+    "command": [
+      "/usr/lib/wsl/lib/nvidia-smi",
+      "--query-gpu=name,uuid,driver_version,memory.total,compute_cap",
+      "--format=csv,noheader"
+    ],
+    "returncode": 0,
+    "stdout": "NVIDIA GeForce RTX 4060 Laptop GPU, GPU-81dc8519-806a-0d83-324d-3b0e235ceac9, 616.56, 8188 MiB, 8.9",
+    "stderr": "",
+    "status": "ok",
+    "parsed": [
+      {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "uuid": "GPU-81dc8519-806a-0d83-324d-3b0e235ceac9",
+        "driver_version": "616.56",
+        "memory.total": "8188 MiB",
+        "memory.total_bytes": 8585740288,
+        "compute_cap": "8.9"
+      }
+    ]
+  }
+}

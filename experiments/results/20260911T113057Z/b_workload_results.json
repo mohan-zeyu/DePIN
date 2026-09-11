@@ -1,0 +1,124 @@
+{
+  "torch": {
+    "torch_version": "2.14.0+cu130",
+    "cuda_runtime": "13.0",
+    "cudnn": 92400,
+    "device": "NVIDIA GeForce RTX 4060 Laptop GPU"
+  },
+  "train": {
+    "fp32": {
+      "status": "ok",
+      "precision": "fp32",
+      "steps": 200,
+      "batch_size": 64,
+      "seed": 20260911,
+      "first_loss": 2.320725679397583,
+      "final_loss": 1.8693277835845947,
+      "mean_loss_last10": 2.103606843948364,
+      "loss_decreased": true,
+      "seconds": 1.5954723930008186,
+      "steps_per_second": 125.35472307598705,
+      "loss_every_log": [
+        2.320725679397583,
+        2.2265567779541016,
+        1.9273499250411987,
+        2.270277261734009
+      ]
+    },
+    "fp16": {
+      "status": "ok",
+      "precision": "fp16",
+      "steps": 200,
+      "batch_size": 64,
+      "seed": 20260911,
+      "first_loss": 2.320709228515625,
+      "final_loss": 2.2531051635742188,
+      "mean_loss_last10": 2.1837677001953124,
+      "loss_decreased": true,
+      "seconds": 1.766789178000181,
+      "steps_per_second": 113.19969721932466,
+      "loss_every_log": [
+        2.320709228515625,
+        2.259613037109375,
+        2.146484375,
+        2.296661376953125
+      ]
+    },
+    "bf16": {
+      "status": "ok",
+      "precision": "bf16",
+      "steps": 200,
+      "batch_size": 64,
+      "seed": 20260911,
+      "first_loss": 2.31982421875,
+      "final_loss": 1.82232666015625,
+      "mean_loss_last10": 2.04161376953125,
+      "loss_decreased": true,
+      "seconds": 1.744485546998476,
+      "steps_per_second": 114.64698021953559,
+      "loss_every_log": [
+        2.31982421875,
+        2.2337646484375,
+        1.436920166015625,
+        2.2064208984375
+      ]
+    }
+  },
+  "inference": {
+    "fp32": {
+      "status": "ok",
+      "precision": "fp32",
+      "batches": 50,
+      "batch_size": 64,
+      "seed": 20260911,
+      "warmup_batches": 3,
+      "seconds": 0.03882678797526751,
+      "images": 3200,
+      "batch_latency_stats": {
+        "n": 50,
+        "min": 0.0005565249994106125,
+        "median": 0.0007706164997216547,
+        "max": 0.0010256850000587292
+      },
+      "output_checksum": 95.66881227493286,
+      "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+    },
+    "fp16": {
+      "status": "ok",
+      "precision": "fp16",
+      "batches": 50,
+      "batch_size": 64,
+      "seed": 20260911,
+      "warmup_batches": 3,
+      "seconds": 0.04156257498107152,
+      "images": 3200,
+      "batch_latency_stats": {
+        "n": 50,
+        "min": 0.0007327099992835429,
+        "median": 0.0008140289974107873,
+        "max": 0.0010343219983042218
+      },
+      "output_checksum": 94.5712890625,
+      "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+    },
+    "bf16": {
+      "status": "ok",
+      "precision": "bf16",
+      "batches": 50,
+      "batch_size": 64,
+      "seed": 20260911,
+      "warmup_batches": 3,
+      "seconds": 0.05222934799530776,
+      "images": 3200,
+      "batch_latency_stats": {
+        "n": 50,
+        "min": 0.0008846970013109967,
+        "median": 0.0010329030010325368,
+        "max": 0.0012850359998992644
+      },
+      "output_checksum": 95.09375,
+      "checksum_note": "输出元素累加和，仅用于跨运行一致性核对，不是计量依据"
+    }
+  },
+  "realism_statement": "训练为真实 SGD 反向传播 + 交叉熵；推理为真实 batch forward。无 sleep/空循环/固定返回值（spec §6.1）。"
+}

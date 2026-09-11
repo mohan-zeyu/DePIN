@@ -1,0 +1,53 @@
+{
+  "experiment": "e_replay_overhead",
+  "status": "受阻",
+  "reason": "计数权限受阻（error），重放实验无法执行",
+  "started_at": "2026-09-11T11:31:34.032870+00:00",
+  "finished_at": "2026-09-11T11:31:52.346020+00:00",
+  "duration_seconds": 18.313,
+  "artifacts": {
+    "gpu_probe": "/home/mohan/depin/experiments/results/20260911T113057Z/a_gpu_probe.json",
+    "summary": "/home/mohan/depin/experiments/results/20260911T113057Z/e_replay_overhead.json",
+    "manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_manifest.json",
+    "results": "/home/mohan/depin/experiments/results/20260911T113057Z/b_workload_results.json",
+    "torch_profiler_estimate": "/home/mohan/depin/experiments/results/20260911T113057Z/c_torch_profiler_estimate.json",
+    "op_manifest": "/home/mohan/depin/experiments/results/20260911T113057Z/c_op_manifest.json",
+    "noise_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_noise_output.txt",
+    "workload_output": "/home/mohan/depin/experiments/results/20260911T113057Z/d_workload_output.txt"
+  },
+  "data": {
+    "replay_batches": 10,
+    "baseline": {
+      "runs": [
+        {
+          "rep": 0,
+          "returncode": 0,
+          "seconds": 4.097408241999801
+        },
+        {
+          "rep": 1,
+          "returncode": 0,
+          "seconds": 4.088269840001885
+        },
+        {
+          "rep": 2,
+          "returncode": 0,
+          "seconds": 4.051403967001534
+        }
+      ],
+      "median_seconds": 4.088269840001885
+    },
+    "ncu": {
+      "found": true,
+      "path": "/home/mohan/opt/nsight-compute/ncu",
+      "counter_permission": {
+        "verdict": "error",
+        "returncode": 1,
+        "timed_out": false,
+        "profiled_rows": 0,
+        "evidence": "CUDA_OK\n\n/home/mohan/depin/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:68: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.\n  import pynvml  # type: ignore[import]\n",
+        "note": "granted=可采集硬件计数；denied=ERR_NVGPUCTRPERM；WSL 内核驱动参数无法常规修改，只能实测"
+      }
+    }
+  }
+}

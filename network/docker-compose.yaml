@@ -1,0 +1,143 @@
+# docker-compose.yaml — depin stage-1 最小开发网络。
+#
+# 拓扑：1 orderer + 1 peer（仅 UserOrg）+ 1 cli。
+# 核验/仲裁组织不运行 peer（集中部署简化，见 README.md 局限性声明）。
+# 镜像 hyperledger/fabric-*:2.5.10 为官方多架构镜像（linux/amd64 与 linux/arm64），
+# Docker 会按宿主架构自动选择，无需在此指定 platform。
+#
+# 依赖：./organizations（cryptogen 输出）与 ./channel-artifacts（configtxgen 输出），
+# 由 scripts/up.sh 生成后再启动本文件。
+
+volumes:
+  orderer.depin.dev:
+  peer0.user.depin.dev:
+
+networks:
+  depin:
+    name: depin_net
+
+services:
+
+  orderer.depin.dev:
+    container_name: orderer.depin.dev
+    image: hyperledger/fabric-orderer:2.5.10
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_LISTENPORT=7050
+      - ORDERER_GENERAL_LOCALMSPID=OrdererOrg
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      # 经典系统通道方式：从 genesis block 启动（fabric 2.5 支持）。
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/artifacts/genesis.block
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      # operations 端口供 scripts/up.sh 做 /healthz 健康等待。
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:9443
+      # admin service 默认也绑 127.0.0.1:9443，会与 operations 冲突，换端口
+      - ORDERER_ADMIN_LISTENADDRESS=127.0.0.1:9445
+    working_dir: /root
+    command: orderer
+    volumes:
+      - ./organizations/ordererOrganizations/depin.dev/orderers/orderer.depin.dev/msp:/var/hyperledger/orderer/msp
+      - ./organizations/ordererOrganizations/depin.dev/orderers/orderer.depin.dev/tls/:/var/hyperledger/orderer/tls:ro
+      - ./channel-artifacts:/var/hyperledger/orderer/artifacts:ro
+      - orderer.depin.dev:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+      - 9443:9443
+    networks:
+      - depin
+
+  peer0.user.depin.dev:
+    container_name: peer0.user.depin.dev
+    image: hyperledger/fabric-peer:2.5.10
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_PROFILE_ENABLED=false
+      - CORE_PEER_TLS_CERT_FILE=/etc/hyperledger/fabric/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
+      - CORE_PEER_ID=peer0.user.depin.dev
+      - CORE_PEER_ADDRESS=peer0.user.depin.dev:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.user.depin.dev:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.user.depin.dev:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.user.depin.dev:7051
+      - CORE_PEER_LOCALMSPID=UserOrg
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
+      # peer 通过宿主 docker.sock 构建/运行链码容器，需与 compose 网络同名。
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      # Fabric 2.5 用 fsouza/go-dockerclient（读 DOCKER_API_VERSION，默认 1.25），
+      # Docker 29+/OrbStack 最低要求 1.40，不显式指定会构建链码镜像失败
+      - DOCKER_API_VERSION=1.44
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=depin_net
+      - CORE_CHAINCODE_EXECUTETIMEOUT=300s
+      - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9444
+    volumes:
+      # 只挂 msp/tls 子目录，保留镜像自带的 core.yaml（整目录挂载会覆盖它）
+      - ./organizations/peerOrganizations/user.depin.dev/peers/peer0.user.depin.dev/msp:/etc/hyperledger/fabric/msp
+      - ./organizations/peerOrganizations/user.depin.dev/peers/peer0.user.depin.dev/tls:/etc/hyperledger/fabric/tls
+      - peer0.user.depin.dev:/var/hyperledger/production
+      - /var/run/docker.sock:/host/var/run/docker.sock
+    working_dir: /root
+    command: peer node start
+    ports:
+      - 7051:7051
+      - 9444:9444
+    networks:
+      - depin
+    depends_on:
+      - orderer.depin.dev
+
+  depin-cc:
+    container_name: depin-cc
+    image: depin-cc:1.0
+    labels:
+      service: hyperledger-fabric
+    environment:
+      # 链码 gRPC server 常驻监听；peer 按 connection.json 主动连接（官方 cc_service 方式）
+      # CCAAS 的 CCID 即 package-id 本身（不加 :label 后缀，握手时 peer 会校验）
+      - CHAINCODE_SERVER_ADDRESS=0.0.0.0:9999
+      - CORE_CHAINCODE_ID_NAME=${CC_PACKAGE_ID:-unset}
+    networks:
+      - depin
+
+  cli:
+    container_name: depin-cli
+    image: hyperledger/fabric-tools:2.5.10
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_LOCALMSPID=UserOrg
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/organizations/peerOrganizations/user.depin.dev/peers/peer0.user.depin.dev/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/organizations/peerOrganizations/user.depin.dev/users/Admin@user.depin.dev/msp
+      - CORE_PEER_ADDRESS=peer0.user.depin.dev:7051
+      # 链码在 fabric-tools 容器内做 go 构建检查，避免依赖本机 Go 工具链。
+      # 可用环境变量 GOPROXY 覆盖（如 GOPROXY=https://goproxy.cn,direct make up）。
+      - GOPROXY=${GOPROXY:-https://proxy.golang.org,direct}
+      - GOTOOLCHAIN=${GOTOOLCHAIN:-auto}
+    working_dir: /opt/chaincode
+    command: bash -c "sleep infinity"
+    volumes:
+      - ./organizations:/opt/organizations
+      - ./channel-artifacts:/opt/channel-artifacts
+      - ../chaincode:/opt/chaincode:ro
+    networks:
+      - depin
+    depends_on:
+      - orderer.depin.dev
+      - peer0.user.depin.dev

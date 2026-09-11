@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "depin-worker"
+version = "0.1.0"
+description = "DePIN GPU Worker (stage-1: GPU 环境探测 + NVML 采样)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+# 刻意保持轻量：torch 等重依赖只放在 experiments/，Worker 包导入不依赖 torch。
+dependencies = [
+    "pynvml>=11.5",
+]
+
+[project.optional-dependencies]
+dev = [
+    # 本地纯逻辑测试不需要额外依赖（fake NVML 注入，不依赖真 GPU / pynvml）
+]
+
+[tool.setuptools.packages.find]
+include = ["depin_worker*"]
