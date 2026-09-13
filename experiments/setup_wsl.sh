@@ -59,19 +59,24 @@ echo "==> 创建 .venv（Python ${PYTHON_VERSION}）"
 echo "==> uv add torch / pynvml"
 "$UV_BIN" add "torch>=2.4" "pynvml>=11.5"
 
-# ---- 5. ncu（允许失败，但必须如实报告）--------------------------------------
-NCU_FAILED=0
-echo "==> uv add nvidia-nsight-compute（ncu CLI wheel）"
-if ! "$UV_BIN" add nvidia-nsight-compute; then
-  NCU_FAILED=1
-  echo "" >&2
-  echo "=================================================================" >&2
-  echo "ERROR: nvidia-nsight-compute 安装失败（当前镜像/平台无对应 wheel）。" >&2
-  echo "  影响：counter_collection / replay_overhead / attribution 的 ncu" >&2
-  echo "  部分将如实记录为「受阻」；torch.profiler 估算部分不受影响。" >&2
-  echo "  可选替代：从 NVIDIA 官网安装 Nsight Compute 后把 ncu 放进 PATH，" >&2
-  echo "  实验脚本会自动发现（PATH / venv bin / 常见安装路径）。" >&2
-  echo "=================================================================" >&2
+# ---- 5. ncu（可选：redist archive 用户级安装，免 sudo）-----------------------
+# PyPI 无 nvidia-nsight-compute 包（实测 404），ncu 用 NVIDIA redist archive 安装。
+# WSL2 / GPU 容器内 ncu 会报 ERR_NVGPUCTRPERM（宿主内核参数，见
+# docs/stage1/gpu-metering-report.md §8）；仅原生 Linux（root）可采硬件计数。
+NCU_VERSION="2025.1.1.2"
+if ! command -v ncu >/dev/null 2>&1; then
+  echo "==> 安装 ncu ${NCU_VERSION} 到 ~/opt/nsight-compute（redist archive）"
+  if curl -sL --fail -o /tmp/nsight-compute.tar.xz \
+      "https://developer.download.nvidia.com/compute/cuda/redist/nsight_compute/linux-x86_64/nsight_compute-linux-x86_64-${NCU_VERSION}-archive.tar.xz"; then
+    mkdir -p "$HOME/opt"
+    tar -xf /tmp/nsight-compute.tar.xz -C "$HOME/opt"
+    ln -sfn "$HOME"/opt/nsight_compute-*-archive "$HOME/opt/nsight-compute"
+    echo "  已安装：export PATH=\"\$HOME/opt/nsight-compute:\$PATH\" 后可用"
+  else
+    echo "警告：ncu 下载失败（网络）；counter_collection / replay_overhead 将记录为受阻" >&2
+  fi
+else
+  echo "==> 检测到 PATH 中已有 ncu，跳过安装"
 fi
 
 # ---- 6. 自检 ----------------------------------------------------------------

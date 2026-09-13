@@ -46,7 +46,7 @@ test-integration:
 ## test-gpu: tier3 GPU 实验（需要真实 NVIDIA GPU 环境）
 test-gpu:
 	@if [ -f experiments/run_experiment.py ]; then \
-		python3 experiments/run_experiment.py; \
+		cd experiments && python3 run_experiment.py; \
 	else \
 		echo "需 GPU 环境：experiments/run_experiment.py 不存在（tier3 未实现/未配置）"; \
 		exit 1; \

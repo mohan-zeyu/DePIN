@@ -1,4 +1,8 @@
-# GPU 计量可行性实验（stage-1）
+# GPU 实验（stage-1：执行真实性研究）
+
+> 2026-09-13 D1 决策后，计费口径已改为「模板工作单元」（结果复算核验），
+> 本目录实验从计费前置条件降级为**执行真实性研究**（负载真实性、归因、
+> 停止延迟仍然有效；硬件计数受阻记录保留）。见 docs/stage1/decision-log.md D1。
 
 对应 GitHub issue #13「搭建最小系统，验证 GPU 计量」的实验部分，
 以及 spec（docs/project-spec.md）§7.3「必须先做的技术验证」七项要求。
@@ -32,8 +36,9 @@ bash experiments/setup_wsl.sh
 - 系统 Python 3.14 缺 venv/ensurepip → 用 uv 项目模式（`pyproject.toml` +
   `uv.lock` + `.venv`），默认 `PYTHON_VERSION=3.12`；
 - 镜像默认清华 `https://pypi.tuna.tsinghua.edu.cn/simple`（`UV_DEFAULT_INDEX` 可覆盖）；
-- `nvidia-nsight-compute`（ncu wheel）装不上会**如实失败**（脚本退出码 1），
-  c/e/d 的 ncu 部分届时记「受阻」。
+- ncu 不是 pip 包：setup_wsl.sh 会从 NVIDIA redist archive 用户级安装到
+  `~/opt/nsight-compute`（免 sudo）；WSL2/GPU 容器内 ncu 报 ERR_NVGPUCTRPERM
+  （宿主参数不可控，如实记「受阻」），仅原生 Linux（root）可采硬件计数。
 
 依赖说明见 `requirements.txt`。
 

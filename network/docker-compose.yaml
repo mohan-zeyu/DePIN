@@ -71,18 +71,12 @@ services:
       - CORE_PEER_ID=peer0.user.depin.dev
       - CORE_PEER_ADDRESS=peer0.user.depin.dev:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer0.user.depin.dev:7052
-      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
       - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.user.depin.dev:7051
       - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.user.depin.dev:7051
       - CORE_PEER_LOCALMSPID=UserOrg
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/msp
-      # peer 通过宿主 docker.sock 构建/运行链码容器，需与 compose 网络同名。
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      # Fabric 2.5 用 fsouza/go-dockerclient（读 DOCKER_API_VERSION，默认 1.25），
-      # Docker 29+/OrbStack 最低要求 1.40，不显式指定会构建链码镜像失败
-      - DOCKER_API_VERSION=1.44
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=depin_net
+      # CCAAS：链码为独立服务（depin-cc），peer 不再构建/运行链码容器，
+      # 无需挂载 docker.sock 与 CORE_VM_* / DOCKER_API_VERSION 等容器运行配置
       - CORE_CHAINCODE_EXECUTETIMEOUT=300s
       - CORE_OPERATIONS_LISTENADDRESS=0.0.0.0:9444
     volumes:
@@ -90,7 +84,6 @@ services:
       - ./organizations/peerOrganizations/user.depin.dev/peers/peer0.user.depin.dev/msp:/etc/hyperledger/fabric/msp
       - ./organizations/peerOrganizations/user.depin.dev/peers/peer0.user.depin.dev/tls:/etc/hyperledger/fabric/tls
       - peer0.user.depin.dev:/var/hyperledger/production
-      - /var/run/docker.sock:/host/var/run/docker.sock
     working_dir: /root
     command: peer node start
     ports:
