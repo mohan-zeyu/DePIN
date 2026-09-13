@@ -85,7 +85,7 @@ stage-1 收尾时按 spec §14 与 issue #13 关闭条件，用下表汇报。�
 | 已实现并实际验证 | 无 GPU 纯逻辑测试（worker 47 + experiments 85 + go 两 module） | `make test` / 各目录 unittest discover | GPU 门禁无卡时退出码 2，不假成功 |
 | 已实现但未验证 | backend HTTP API 连真实网络（fabric-gateway 集成运行） | `cd backend && go test ./...`（mock 单测 10/10 过；gateway 连网运行未执行） | 缺一次对运行中 peer 的 whoami/devices 实调 |
 | 已实现但未验证 | GitHub Actions 分层 CI | `.github/workflows/ci.yml` | 配置就绪，未在 GitHub 实际触发 |
-| 明确受阻 | ncu 硬件性能计数（ERR_NVGPUCTRPERM，WSL 无法放行） | `experiments/results/20260911T113057Z/a_environment_survey.json` | 精度分列硬件计数、重放开销（实验 c/e）未获得；未静默替换计费口径；修复路径 3 条待用户决策（Windows 注册表 / Windows 侧 Nsight Compute / 原生 Linux 机器） |
+| 明确受阻（计费已不依赖，D1） | ncu 硬件性能计数（ERR_NVGPUCTRPERM；WSL 与 AutoDL 容器均实测受阻，宿主内核参数不可控） | `experiments/results/20260911T113057Z/a_environment_survey.json` | 精度分列硬件计数、重放开销未获得；**2026-09-13 用户决策（D1）改按模板工作单元计费，本项不再阻塞计费**，保留为执行真实性研究；如未来需要可走 Windows 注册表 / 非容器 GPU VM |
 | 明确受阻 | 每进程 GPU 利用率/显存 NVML 字段（WSL 驱动不支持） | worker/depin_worker/nvml_sampler.py 输出 null 字段 | 影响 M2 归因方案候选 b 的评估，需原生 Linux 复测 |
 | 仍待用户确认 | 全部 55 项业务/经济/治理参数 | `undecided-parameters.md`（重点：R2 计量权限门槛、M1 采信证据等级、M2 订单归因、M4 WSL 是否算可计量环境、E1–E5 经济参数） | 示例配置均非已批准规则 |
 

@@ -49,9 +49,11 @@ uv run python run_experiment.py --only b,d,f                 # 子集；无 GPU 
 - **已实现并实际验证**：最小网络一键启停；链码身份隔离（越权拒绝、同 MSP 双证书一票、
   分证据计票、幂等，链上实测 8/8）；GPU 真实负载（fp32/fp16/bf16 训练+推理）；进程级
   归因（nvidia-smi）；停止延迟采样；纯逻辑测试 132 个。
-- **明确受阻**：ncu 硬件性能计数在 WSL2 上报 `ERR_NVGPUCTRPERM`（驱动参数由 Windows
-  宿主管理）——按精度运算计数与重放开销未获得，**未回退时间计费/公式估算**；修复路径
-  三选一待确认（Windows 注册表 / Windows 侧 Nsight Compute / 原生 Linux 机器）。
+- **明确受阻（已不阻塞计费）**：ncu 硬件性能计数在 WSL2 与 AutoDL 容器均报
+  `ERR_NVGPUCTRPERM`（宿主内核参数不可控），按精度计数与重放开销未获得，**未回退
+  时间计费/公式估算**。2026-09-13 用户决策（D1）：**计费口径改为「模板工作单元」**
+  （训练 step / 推理 batch·token·样本数，交付结果可复算核验），硬件计数降级为
+  执行真实性研究。详见 docs/stage1/decision-log.md D1。
 - **仍待确认**：55 项业务参数见 [docs/stage1/undecided-parameters.md](docs/stage1/undecided-parameters.md)，
   四类交付状态汇总见 [docs/stage1/acceptance-tests.md](docs/stage1/acceptance-tests.md)。
 
